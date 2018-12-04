@@ -1,0 +1,101 @@
+@import "../../assets/scss/_reset";
+@import "../../assets/scss/_define";
+html, body {
+    @extend %pr;
+    @extend %h100;
+    @extend %oh;
+}
+body {
+    background-color: #f2f2f2;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.pop-msg-wrap,
+.pop-wrap{
+    @extend %pf;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %b0;
+    @extend %df;
+    justify-content: center;
+    align-items: center;
+}
+.pop-wrap{
+    background-color: rgba(0,0,0,.1);
+}
+.pop-prompt{
+    @extend %dib;
+    color: #ffffff;
+    padding: j(5) j(30);
+    line-height: 1.5;
+    font-size: j(14);
+    border-radius: j(4);
+    margin: 0 j(30);
+    background-color: rgba(0,0,0,.9);
+}
+.pop-icon{
+    @extend %pa;
+    @extend %t50;
+    @extend %l50;
+    margin-top: -15px;
+    margin-left: -15px;
+    width: 31px;
+    height: 31px;
+    background: url('~assets/images/css/loading.gif') no-repeat;
+    background-size: contain;
+}
+
+.btn{
+    @extend %cp;
+}
+
+.pop-confirm {
+    @extend %pf;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %b0;
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 9999;
+}
+.pop-confirm-inner{
+    @extend %pa;
+    @extend %df;
+    @extend %fdc;
+    width: j(270);
+    background-color: #FFFFFF;
+    border-radius: j(10);
+}
+.pop-confirm-con{
+    @extend %df1;
+    @extend %tac;
+    padding: j(34) j(36) j(22);
+    line-height: j(30);
+    font-size: j(16);
+    color: #333;
+}
+.pop-confirm-operate{
+    @extend %df;
+    height: j(44);
+    border-top: 1px solid #DEDEDE;
+}
+.pop-confirm-btn{
+    @extend %cp;
+    @extend %df1;
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    @extend %h100;
+    font-size: j(17);
+}
+.pop-confirm-cancel{
+    color: #999999;
+    border-right: 1px solid #DEDEDE;
+}
+.pop-confirm-sure{
+    color: #009AE0;
+}
