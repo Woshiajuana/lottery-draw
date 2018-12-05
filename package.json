@@ -8,6 +8,7 @@
     "test": "node cmd -d dist&&node cmd -c&&node cmd -r CS&&webpack --watch --config ./build/webpack.config.js",
     "build": "node cmd -d dist&&node cmd -c&&node cmd -r SC&&webpack --watch --config ./build/webpack.config.js",
     "clear": "node cmd -d dist",
+    "service": "node service",
     "copy": "node cmd -c",
     "serve": "serve -p 52580"
   },
@@ -39,6 +40,7 @@
     "html-withimg-loader": "^0.1.16",
     "jquery": "^3.3.1",
     "node-sass": "^4.7.2",
+    "nodejs-websocket": "^1.7.2",
     "postcss-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "serve": "^9.4.2",

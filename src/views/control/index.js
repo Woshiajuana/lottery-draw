@@ -13,17 +13,20 @@ const Controller = {
     },
     addEvent() {
         this.$elBtn.on('click', this.handleSend.bind(this));
+        this.webSocket.on('onmessage', this.handleNews.bind(this))
     },
     handleSend () {
-        console.log(1111)
         let value = this.$elInput.val();
         if (!value)
             return null;
         this.sendMessage(value);
     },
     sendMessage (msg) {
-        console.log(msg)
         this.webSocket.send(msg);
+    },
+    handleNews (e) {
+        let msg = e.data;
+        $('body').append(`<p>${msg}</p>`);
     },
 };
 Controller.init();
