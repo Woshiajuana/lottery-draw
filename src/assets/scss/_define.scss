@@ -7,6 +7,10 @@
     @return ($px / $base-font-size) * 1rem;
 }
 
+%thc{
+    -webkit-tap-highlight-color: transparent;
+}
+
 %fs0{
     font-size: 0;
 }
