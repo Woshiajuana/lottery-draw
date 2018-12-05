@@ -2,8 +2,9 @@
 @import "../../assets/scss/common";
 
 body{
+    @extend %h100;
+    @extend %oh;
     background-color: #fff;
-    min-height: j(480);
 }
 
 .header{
