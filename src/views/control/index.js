@@ -1,30 +1,29 @@
 import $                from 'jquery'
-import DeviceUtil       from 'utils/device.util'
 import Toast            from 'utils/toast.util'
+import WebSocketService from 'utils/websocket.util'
 
 // 列表控制器
-const DownloadController = {
+const Controller = {
     $elBtn: $('#button'),
-    device: {},
+    $elInput: $('#input'),
+    webSocket: null,
     init () {
-        this.getDeviceInfo();
+        this.webSocket = new WebSocketService();
         this.addEvent();
     },
-    getDeviceInfo () {
-        this.device = DeviceUtil.get();
-    },
     addEvent() {
-        this.$elBtn.on('click', this.handleDown.bind(this));
+        this.$elBtn.on('click', this.handleSend.bind(this));
     },
-    handleDown () {
-        let url = ANDROID_URL;
-        if (this.isWeChat && this.isQq)
-            return Toast.msg('请使用系统浏览器打开本页面进行下载');
-        if (this.device.isAndroid)
-            url = ANDROID_URL;
-        else if (this.device.isIphone)
-            url = iOS_URL;
-        window.location.href = url;
+    handleSend () {
+        console.log(1111)
+        let value = this.$elInput.val();
+        if (!value)
+            return null;
+        this.sendMessage(value);
+    },
+    sendMessage (msg) {
+        console.log(msg)
+        this.webSocket.send(msg);
     },
 };
-DownloadController.init();
+Controller.init();
