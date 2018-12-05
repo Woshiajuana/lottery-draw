@@ -1,0 +1,59 @@
+@import "../../assets/scss/_define";
+@import "../../assets/scss/common";
+
+body{
+    background-color: #fff;
+    min-height: j(480);
+}
+
+.header{
+    padding: j(20) j(20) 0;
+}
+.logo{
+    width: j(86);
+    height: j(20);
+}
+
+.container{
+    @extend %df;
+    @extend %fdc;
+    @extend %aic;
+    padding-top: j(46);
+}
+.banner{
+    width: j(265);
+    height: j(265);
+}
+.prompt{
+    @extend %fwn;
+    font-size: j(17);
+    color: #34495E;
+    line-height: j(24);
+}
+.button{
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    margin-top: j(70);
+    width: j(263);
+    height: j(45);
+    background-color: #029BDD;
+    border-radius: j(8);
+}
+.button-text{
+    font-size: j(18);
+    color: #fff;
+}
+
+.footer{
+    @extend %pf;
+    @extend %l0;
+    @extend %r0;
+    bottom: j(40);
+    line-height: j(11);
+}
+.prompt-text{
+    @extend %tac;
+    font-size: j(8);
+    color: #333;
+}

@@ -1,0 +1,54 @@
+@import "../../assets/scss/_define";
+@import "../../assets/scss/common";
+
+body{
+    background-color: #fff;
+    min-height: j(480);
+}
+.header{
+    padding: j(20) j(20) 0;
+}
+.logo{
+    width: j(78);
+    height: j(31.5);
+}
+
+
+.container{
+    @extend %df;
+    @extend %fdc;
+    @extend %aic;
+}
+
+.input-wrap{
+    margin-top: j(120);
+    width: j(300);
+    height: j(60);
+    border-bottom: 1px solid #dedede;
+    input{
+        @extend %w100;
+        @extend %h100;
+        @extend %tac;
+        color: #333;
+        line-height: j(60);
+        font-size: j(24);
+        border: none;
+    }
+}
+
+.button{
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    margin-top: j(50);
+    font-size: j(24);
+    width: j(100);
+    height: j(100);
+    border-radius: 50%;
+    border: 1px solid #fefefe;
+    box-shadow: 0 j(2) j(1) rgba(0,0,0,.1);
+    &:active{
+        color: #fff;
+        background-color: #dedede;
+    }
+}

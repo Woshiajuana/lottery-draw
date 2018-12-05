@@ -9,7 +9,7 @@
     "build": "node cmd -d dist&&node cmd -c&&node cmd -r SC&&webpack --watch --config ./build/webpack.config.js",
     "clear": "node cmd -d dist",
     "copy": "node cmd -c",
-    "serve": "serve -p 42580"
+    "serve": "serve -p 52580"
   },
   "repository": {
     "type": "git",
