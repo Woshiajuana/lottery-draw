@@ -18,8 +18,26 @@ io.on('connection', (socket) => {
     socket.emit('success', {});
 
     // 验证口令
-    socket.on('password', (data) => {
-        console.log()
+    socket.on('password', (data = '') => {
+        try {
+            let {
+                password,
+            } = data;
+            if (!password)
+                throw new Error();
+            let isRight = false;
+            for (let key in controllerClient) {
+                if (key === password) {
+                    controllerClient[key] = socket;
+                    isRight = true;
+                }
+            }
+            if (!isRight)
+                throw new Error();
+            socket.emit('password', { code: '0000', msg: '登录成功！'})
+        } catch (e) {
+            socket.emit('password', { code: '-1', msg: '口令错误！'})
+        }
     });
 
     // 断开链接
