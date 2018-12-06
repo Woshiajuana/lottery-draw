@@ -19,22 +19,16 @@
         </div>
     </div>
     <div class="container">
-        <div class="input-wrap">
-            <input type="text" maxlength="6" id="input" placeholder="数据"/>
-        </div>
-        <div class="btn button" id="button">
-            <span>SEND</span>
+        <div class="login-wrap view-wrap" id="login-wrap">
+            <div class="input-wrap">
+                <input type="password" maxlength="6" id="login-input" placeholder="口令"/>
+            </div>
+            <div class="btn button" id="login-button">
+                <span>GO</span>
+            </div>
         </div>
     </div>
-    <script src="assets/lib/socket.io-2.0.3.js"></script>
-    <script>
-//        return
-        var socket = io.connect('ws://localhost:8008');
-        socket.on('news', function (data) {
-            console.log(data);
-            socket.emit('my other event', { my: 'data' });
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 </body>
 </html>
 

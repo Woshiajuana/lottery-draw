@@ -4,7 +4,8 @@
   "description": "rn app for imocc",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node bin"
   },
   "author": "ajuan",
   "license": "MIT",
@@ -32,6 +33,7 @@
     "lodash": "^4.17.11",
     "mongoose": "^5.3.12",
     "sha1": "^1.1.1",
+    "socket.io": "^2.2.0",
     "speakeasy": "^2.0.0",
     "uuid": "^3.3.2",
     "xss": "^1.0.3"

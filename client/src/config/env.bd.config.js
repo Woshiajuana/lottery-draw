@@ -7,6 +7,8 @@ export default {
     PAY_URL: 'http://s0000.iok.la:19804/rest/api/102005',   // 接口(支付)
 
     // SOCKET_URL: 'ws://echo.websocket.org/',
-    SOCKET_URL: 'ws://localhost:8008/',
+    // SOCKET_URL: 'ws://172.16.1.184:8089/',
+    // SOCKET_URL: 'ws://192.180.51.111:9090/',
+    SOCKET_URL: 'http://localhost:9090/',
 
 }

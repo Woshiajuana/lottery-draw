@@ -1,39 +1,50 @@
 import $                from 'jquery'
 import Toast            from 'utils/toast.util'
-import WebSocketService from 'utils/websocket.util'
+import Socket           from 'utils/socket.util'
 
-// var socket = io('ws://localhost:8008');
-// console.log(socket)
-// 列表控制器
+// 登录控制器
 const Controller = {
-    $elBtn: $('#button'),
-    $elInput: $('#input'),
-    webSocket: null,
+    $elPage: $('#login-wrap'),
+    $elBtn: $('#login-button'),
+    $elInput: $('#login-input'),
+    socket: null,
     init () {
-        // this.webSocket = new WebSocketService();
-        this.addEvent();
+        this.addDivEvent();
     },
-    addEvent() {
-        this.$elBtn.on('click', this.handleSend.bind(this));
-        // this.webSocket.on('onmessage', this.handleNews.bind(this))
-        // socket.on('news', function (data) {
-        //     console.log(data);
-        // });
+    addDivEvent() {
+        this.$elBtn.on('click', this.handleLogin.bind(this));
     },
-    handleSend () {
-        let value = this.$elInput.val();
-        if (!value)
+    addSocketEvent () {
+        if (!this.socket)
             return null;
-        this.sendMessage(value);
+        this.socket.on('connect success', this.handleConnect.bind(this));
+        this.socket.on('error', this.handleError.bind(this));
+        this.socket.on('close', this.handleClose.bind(this));
     },
-    sendMessage (msg) {
-        // console.log(msg)
-        // this.webSocket.send(msg);
-        // socket.emit('my other event', { my: 'data' });
+    // 创建登录
+    handleLogin () {
+        let password = this.$elInput.val();
+        if (!password)
+            return Toast.msg('请输入口令');
+        Toast.show();
+        this.socket = new Socket();
+        this.addSocketEvent();
     },
-    handleNews (e) {
-        let msg = e.data;
-        $('body').append(`<p>${msg}</p>`);
+    // 链接成功
+    handleConnect (data) {
+        Toast.hide();
+        this.$elPage.hide();
+        $('body').append(`<p>登录成功${data}</p>`);
+        let password = this.$elInput.val();
+        this.socket.emit('password', { password });
+    },
+    // 链接错误
+    handleError () {
+        this.$elPage.show();
+    },
+    // 链接关闭
+    handleClose () {
+        this.$elPage.show();
     },
 };
 Controller.init();

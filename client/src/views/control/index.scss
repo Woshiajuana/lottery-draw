@@ -21,11 +21,23 @@ body{
     font-size: j(14);
 }
 
-
 .container{
+    @extend %pr;
+    @extend %h100;
+    @extend %w100;
+    @extend %oh;
+}
+
+.view-wrap {
+    @extend %pa;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %b0;
     @extend %df;
     @extend %fdc;
     @extend %aic;
+    overflow-y: auto;
 }
 
 .input-wrap{
@@ -48,13 +60,13 @@ body{
     @extend %df;
     @extend %aic;
     @extend %jcc;
+    @include tst(all, .3);
     margin-top: j(50);
     font-size: j(24);
-    width: j(100);
-    height: j(100);
+    width: j(80);
+    height: j(80);
     border-radius: 50%;
-    border: 1px solid #fefefe;
-    box-shadow: 0 j(2) j(1) rgba(0,0,0,.1);
+    box-shadow: 0 j(2) j(1) j(2) rgba(0,0,0,.1);
     &:active{
         color: #fff;
         background-color: #dedede;
