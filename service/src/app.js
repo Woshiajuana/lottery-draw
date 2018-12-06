@@ -19,6 +19,7 @@ io.on('connection', (socket) => {
 
     // 验证口令
     socket.on('password', (data = '') => {
+        console.log(data);
         try {
             let {
                 password,
@@ -42,7 +43,7 @@ io.on('connection', (socket) => {
 
     // 断开链接
     socket.on('disconnect', () => {
-        console.log('user disconnected');
+        // console.log('user disconnected');
     });
 
 });

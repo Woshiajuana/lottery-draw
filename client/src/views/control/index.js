@@ -7,21 +7,22 @@ const Controller = {
     $elPage: $('#login-wrap'),
     $elBtn: $('#login-button'),
     $elInput: $('#login-input'),
-    socket: null,
+    socketService: {
+        is: false,
+        socket: null,
+        event: [
+            'success',
+            'error',
+            'close',
+            'message',
+            'disconnect',
+            'password',
+        ],
+    },
     init () {
-        this.addDivEvent();
-    },
-    addDivEvent() {
+        this.socketService.socket = new Socket();
+        this.socketService.socket.on(this.socketService.event, this);
         this.$elBtn.on('click', this.handleLogin.bind(this));
-    },
-    addSocketEvent () {
-        if (!this.socket)
-            return null;
-        this.socket.on('success', this.handleConnect.bind(this));
-        this.socket.on('error', this.handleError.bind(this));
-        this.socket.on('close', this.handleClose.bind(this));
-        this.socket.on('message', this.handleMessage.bind(this));
-        this.socket.on('disconnect', this.handleDisconnect.bind(this));
     },
     // 创建登录
     handleLogin () {
@@ -29,25 +30,17 @@ const Controller = {
         if (!password)
             return Toast.msg('请输入口令');
         Toast.show();
-        this.socket = new Socket();
-        this.addSocketEvent();
+        this.socketService.socket.emit('password', { password });
     },
-    // 链接成功
-    handleConnect (data) {
-        Toast.hide();
-        let password = this.$elInput.val();
-        this.socket.emit('password', { password });
-    },
-    // 通讯
-    handleMessage (data) {
+    // 验证密码结果 验证口令
+    handlePassword (data, socket) {
         let {
             code,
             msg,
         } = data;
-        if (code === '-1') {
-            Toast.hide();
-            Toast.msg(msg);
-        }
+        code === '0000' ? this.$elPage.hide() : this.$elPage.show();
+        Toast.hide();
+        Toast.msg(msg);
     },
     // 断开链接
     handleDisconnect (data) {
