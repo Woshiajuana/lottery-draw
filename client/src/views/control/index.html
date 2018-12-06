@@ -26,6 +26,15 @@
             <span>SEND</span>
         </div>
     </div>
+    <script src="assets/lib/socket.io-2.0.3.js"></script>
+    <script>
+//        return
+        var socket = io.connect('ws://localhost:8008');
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', { my: 'data' });
+        });
+    </script>
 </body>
 </html>
 
