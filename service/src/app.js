@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
                 type,
                 title,
             } = data;
-            broadcastSocket(screenClient, 'menu', data);
+            broadcastSocket(screenClient, 'menu', {code: '0000', data, msg: '成功'});
         } catch (e) {
             socket.emit('password', { code: '-1', msg: e.toString()})
         }
