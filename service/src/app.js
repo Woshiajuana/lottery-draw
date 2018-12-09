@@ -31,12 +31,14 @@ io.on('connection', (socket) => {
                 if (key === password) {
                     controllerClient[key] = socket;
                     isRight = true;
+                    console.log(`控制器${password}进入`);
                 }
             }
             for (let key in screenClient) {
                 if (key === password) {
                     screenClient[key] = socket;
                     isRight = true;
+                    console.log(`大屏幕${password}进入`);
                 }
             }
             if (!isRight)
@@ -51,9 +53,13 @@ io.on('connection', (socket) => {
     socket.on('menu', (data) => {
         console.log(data);
         try {
-
+            let {
+                type,
+                title,
+            } = data;
+            broadcastSocket(screenClient, 'menu', data);
         } catch (e) {
-            socket.emit('password', { code: '-1', msg: '口令错误！'})
+            socket.emit('password', { code: '-1', msg: e.toString()})
         }
     });
 
@@ -64,18 +70,18 @@ io.on('connection', (socket) => {
 
 });
 
-
-function checkSocket(socket, clients) {
+function broadcastSocket(sockets, event, data) {
     let result = false;
-    for (let key in clients) {
-        if (screenClient[key] === socket) {
+    for (let key in sockets) {
+        let socket = sockets[key];
+        if (socket) {
+            socket.emit(event, data);
             result = true;
         }
     }
-    return result;
+    if (!result)
+        throw '暂无客户端接入';
 }
-
-
 
 
 server.listen(9090);

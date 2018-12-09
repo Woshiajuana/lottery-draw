@@ -39,7 +39,7 @@ const Controller = {
         this.socketService.socket = new Socket();
         this.socketService.socket.on(this.socketService.event, this);
         this.$elBtn.on('click', this.handleLogin.bind(this));
-        this.$elMenuPage.on('click', '.main-item', this.handleMenu.bind(this));
+        this.$elMenuPage.on('click', '.menu-item', this.handleMenu.bind(this));
     },
     // 菜单控制
     handleMenu (e) {
