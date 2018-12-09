@@ -11,7 +11,7 @@ class Socket {
         }
         if (typeof event === 'object') {
             event.forEach((e = '') => {
-                let handle = `handle${e.toUpperCase().substring(0,1)}${e.substring(1)}`;
+                let handle = `${e}Handle`;
                 this.socket.on(e, (data) => {
                     callback[handle] && callback[handle](data, this);
                 });

@@ -20,6 +20,20 @@ const Controller = {
             'password',
         ],
     },
+    menuData: {
+        '0001': {
+            type: '0001',
+            title: '签到大屏幕',
+        },
+        '0002': {
+            type: '0002',
+            title: '抽取一二三等奖',
+        },
+        '0003': {
+            type: '0003',
+            title: '随机抽奖',
+        },
+    },
     init () {
         this.socketService.socket = new Socket();
         this.socketService.socket.on(this.socketService.event, this);
@@ -29,7 +43,9 @@ const Controller = {
     // 菜单控制
     handleMenu (e) {
         let $elItem = $(e.target);
-
+        let type = $elItem.data('type');
+        let data = this.menuData[type];
+        this.socketService.socket.emit('menu', data);
     },
     // 创建登录
     handleLogin () {
@@ -40,7 +56,7 @@ const Controller = {
         this.socketService.socket.emit('password', { password });
     },
     // 验证密码结果 验证口令
-    handlePassword (data, socket) {
+    passwordHandle (data, socket) {
         let {
             code,
             msg,
@@ -56,17 +72,17 @@ const Controller = {
         Toast.msg(msg);
     },
     // 断开链接
-    handleDisconnect (data) {
+    disconnectHandle (data) {
         console.log(data);
         Toast.hide();
         Toast.msg(data.msg);
     },
     // 链接错误
-    handleError () {
+    errorHandle () {
         this.$elPage.show();
     },
     // 链接关闭
-    handleClose () {
+    closeHandle () {
         this.$elPage.show();
     },
 };
