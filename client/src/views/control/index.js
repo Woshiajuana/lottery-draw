@@ -5,6 +5,7 @@ import Socket           from 'utils/socket.util'
 // 登录控制器
 const Controller = {
     $elPage: $('#login-wrap'),
+    $elMenuPage: $('#menu-wrap'),
     $elBtn: $('#login-button'),
     $elInput: $('#login-input'),
     socketService: {
@@ -23,6 +24,12 @@ const Controller = {
         this.socketService.socket = new Socket();
         this.socketService.socket.on(this.socketService.event, this);
         this.$elBtn.on('click', this.handleLogin.bind(this));
+        this.$elMenuPage.on('click', '.main-item', this.handleMenu.bind(this));
+    },
+    // 菜单控制
+    handleMenu (e) {
+        let $elItem = $(e.target);
+
     },
     // 创建登录
     handleLogin () {
@@ -38,7 +45,13 @@ const Controller = {
             code,
             msg,
         } = data;
-        code === '0000' ? this.$elPage.hide() : this.$elPage.show();
+        if (code === '0000') {
+            this.$elPage.removeClass('show');
+            this.$elMainPage.addClass('show');
+        } else {
+            this.$elPage.addClass('show');
+            this.$elMainPage.removeClass('show');
+        }
         Toast.hide();
         Toast.msg(msg);
     },
