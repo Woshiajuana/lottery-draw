@@ -18,6 +18,7 @@ const Controller = {
             'message',
             'disconnect',
             'password',
+            'menu',
         ],
     },
     menuData: {
@@ -54,6 +55,14 @@ const Controller = {
             return Toast.msg('请输入口令');
         Toast.show();
         this.socketService.socket.emit('password', { password });
+    },
+    // 菜单处理
+    menuHandle () {
+        let {
+            code,
+            msg,
+        } = data;
+        Toast.msg(msg);
     },
     // 验证密码结果 验证口令
     passwordHandle (data, socket) {
