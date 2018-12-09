@@ -2,58 +2,96 @@
 @import "../../assets/scss/common";
 
 body{
+    @extend %h100;
+    @extend %oh;
     background-color: #fff;
-    min-height: j(480);
 }
 
 .header{
     padding: j(20) j(20) 0;
 }
 .logo{
-    width: j(86);
-    height: j(20);
+    width: j(78);
+    height: j(31.5);
+}
+.control{
+    @extend %pf;
+    top: j(20);
+    right: j(20);
+    font-size: j(14);
 }
 
 .container{
-    @extend %df;
+    @extend %pr;
+    @extend %h100;
+    @extend %w100;
+    @extend %oh;
+}
+
+.view-wrap {
+    @extend %pa;
+    @extend %dn;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %b0;
     @extend %fdc;
     @extend %aic;
-    padding-top: j(46);
+    overflow-y: auto;
+    &.show{
+        @extend %df;
+    }
 }
-.banner{
-    width: j(265);
-    height: j(265);
+
+.input-wrap{
+    margin-top: j(120);
+    width: j(300);
+    height: j(60);
+    border-bottom: 1px solid #dedede;
+    input{
+        @extend %w100;
+        @extend %h100;
+        @extend %tac;
+        color: #333;
+        line-height: j(60);
+        font-size: j(24);
+        border: none;
+    }
 }
-.prompt{
-    @extend %fwn;
-    font-size: j(17);
-    color: #34495E;
-    line-height: j(24);
-}
+
 .button{
     @extend %df;
     @extend %aic;
     @extend %jcc;
-    margin-top: j(70);
-    width: j(263);
-    height: j(45);
-    background-color: #029BDD;
-    border-radius: j(8);
-}
-.button-text{
-    font-size: j(18);
-    color: #fff;
+    @include tst(all, .3);
+    margin-top: j(50);
+    font-size: j(24);
+    width: j(80);
+    height: j(80);
+    border-radius: 50%;
+    box-shadow: 0 j(2) j(1) j(2) rgba(0,0,0,.1);
+    &:active{
+        color: #fff;
+        background-color: #dedede;
+    }
 }
 
-.footer{
-    @extend %pf;
-    @extend %l0;
-    @extend %r0;
-    bottom: j(40);
-    line-height: j(11);
+
+.menu-wrap,
+.menu-inner{
+    @extend %df;
+    @extend %aic;
+    @extend %fdc;
 }
-.prompt-text{
-    @extend %tac;
-    font-size: j(8);
+.menu-inner{
+    margin-top: 120px;
+}
+.menu-item{
+    @extend %cp;
+    line-height: 2;
+    font-size: j(18);
     color: #333;
+    &:hover{
+        text-decoration: underline;
+    }
 }
