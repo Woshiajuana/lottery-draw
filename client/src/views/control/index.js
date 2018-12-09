@@ -72,10 +72,10 @@ const Controller = {
         } = data;
         if (code === '0000') {
             this.$elPage.removeClass('show');
-            this.$elMainPage.addClass('show');
+            this.$elMenuPage.addClass('show');
         } else {
             this.$elPage.addClass('show');
-            this.$elMainPage.removeClass('show');
+            this.$elMenuPage.removeClass('show');
         }
         Toast.hide();
         Toast.msg(msg);

@@ -16,8 +16,22 @@
         <img src="../../assets/images/html/logo.png" alt="即富" class="logo">
     </div>
     <div class="container">
-        <div class="view-wrap" id="sign-wrap">
+        <div class="view-wrap login-wrap show" id="login-wrap">
+            <div class="input-wrap">
+                <input type="password" maxlength="6" id="login-input" placeholder="口令"/>
+            </div>
+            <div class="btn button" id="login-button">
+                <span>GO</span>
+            </div>
+        </div>
+        <div class="view-wrap sign-wrap" id="sign-wrap">
             <p>签到展示</p>
+        </div>
+        <div class="view-wrap prize-wrap" id="prize-wrap">
+            <p>抽奖123</p>
+        </div>
+        <div class="view-wrap lottery-wrap" id="lottery-wrap">
+            <p>随机抽奖</p>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
