@@ -38,13 +38,14 @@ body{
     @extend %fdc;
     @extend %aic;
     overflow-y: auto;
+    padding-top: j(120);
     &.show{
         @extend %df;
     }
 }
 
 .input-wrap{
-    margin-top: j(120);
+    //margin-top: j(120);
     width: j(300);
     height: j(60);
     border-bottom: 1px solid #dedede;
@@ -56,6 +57,9 @@ body{
         line-height: j(60);
         font-size: j(24);
         border: none;
+    }
+    p{
+        font-size: j(18);
     }
 }
 
