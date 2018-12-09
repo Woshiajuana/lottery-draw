@@ -33,9 +33,25 @@ io.on('connection', (socket) => {
                     isRight = true;
                 }
             }
+            for (let key in screenClient) {
+                if (key === password) {
+                    screenClient[key] = socket;
+                    isRight = true;
+                }
+            }
             if (!isRight)
                 throw new Error();
             socket.emit('password', { code: '0000', msg: '登录成功！'})
+        } catch (e) {
+            socket.emit('password', { code: '-1', msg: '口令错误！'})
+        }
+    });
+
+    // 菜单
+    socket.on('menu', (data) => {
+        console.log(data);
+        try {
+
         } catch (e) {
             socket.emit('password', { code: '-1', msg: '口令错误！'})
         }
@@ -48,6 +64,16 @@ io.on('connection', (socket) => {
 
 });
 
+
+function checkSocket(socket, clients) {
+    let result = false;
+    for (let key in clients) {
+        if (screenClient[key] === socket) {
+            result = true;
+        }
+    }
+    return result;
+}
 
 
 
