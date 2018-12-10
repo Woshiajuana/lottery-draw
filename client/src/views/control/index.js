@@ -129,6 +129,10 @@ const Controller = {
         if (!password)
             return Toast.msg('请输入口令');
         Toast.show();
+        if (!this.socketService.socket) {
+            this.socketService.socket = new Socket();
+            this.socketService.socket.on(this.socketService.event, this);
+        }
         this.socketService.socket.emit('password', { password });
     },
     // 抽奖按钮事件
@@ -159,6 +163,11 @@ const Controller = {
     // 页面展示
     switchPage (page) {
         this.$elPage.removeClass('show');
+        if (page === this.$elLoginPage) {
+            this.$elMenuBtn.addClass('hidden');
+        } else {
+            this.$elMenuBtn.removeClass('hidden');
+        }
         page && page.addClass('show');
     },
 
@@ -178,28 +187,30 @@ const Controller = {
             msg,
         } = data;
         if (code === '0000') {
-            this.$elPage.removeClass('show');
-            this.$elMenuPage.addClass('show');
+            this.switchPage(this.$elSignPage);
         } else {
-            this.$elPage.addClass('show');
-            this.$elMenuPage.removeClass('show');
+            this.switchPage(this.$elLoginPage);
         }
         Toast.hide();
         Toast.msg(msg);
     },
     // 断开链接
     disconnectHandle (data) {
-        console.log(data);
+        console.log('断开链接', data);
+        this.socketService.socket = null;
+        this.switchPage(this.$elLoginPage);
         Toast.hide();
         Toast.msg(data.msg);
     },
     // 链接错误
     errorHandle () {
-        this.$elPage.show();
+        console.log('链接错误', data);
+        this.switchPage(this.$elLoginPage);
     },
     // 链接关闭
     closeHandle () {
-        this.$elPage.show();
+        console.log('链接关闭', data);
+        this.switchPage(this.$elLoginPage);
     },
 };
 Controller.init();
