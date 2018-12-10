@@ -53,13 +53,11 @@
                         <input type="tel" class="number" maxlength="6" placeholder="抽奖人数"/>
                     </div>
                 </div>
-                <div class="lottery-operate">
-                    <div class="btn button">
-                        <span>GO</span>
-                    </div>
-                    <div class="btn button">
-                        <span>START</span>
-                    </div>
+                <div class="lottery-operate go" id="lottery-operate">
+                    <div class="btn button reset" data-type="go"></div>
+                    <div class="btn button go" data-type="start">GO</div>
+                    <div class="btn button start" data-type="stop"></div>
+                    <div class="btn button stop" data-type="go"></div>
                 </div>
             </div>
             <!--/抽奖-->

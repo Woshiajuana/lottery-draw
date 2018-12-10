@@ -169,6 +169,31 @@ body{
         color: #fff;
         background-color: #dedede;
     }
+    &.start{
+        background: url("../../assets/images/css/start.png") center no-repeat;
+        background-size: j(30);
+        &:active{
+            color: #fff;
+            background-color: #dedede;
+        }
+    }
+    &.reset{
+        background: url("../../assets/images/css/reset.png") center no-repeat;
+        background-size: j(30);
+        &:active{
+            color: #fff;
+            background-color: #dedede;
+        }
+
+    }
+    &.stop{
+        background: url("../../assets/images/css/stop.png") center no-repeat;
+        background-size: j(30);
+        &:active{
+            color: #fff;
+            background-color: #dedede;
+        }
+    }
 }
 
 .sign-inner{
@@ -201,6 +226,26 @@ body{
     margin-top: j(50);
     .button{
         margin: 0 j(10);
+    }
+    &.go{
+        .reset,
+        .start,
+        .stop{
+            @extend %dn;
+        }
+    }
+    &.start{
+        .go,
+        .stop{
+            @extend %dn;
+        }
+    }
+    &.stop{
+        .go,
+        .start,
+        .reset{
+            @extend %dn;
+        }
     }
 }
 

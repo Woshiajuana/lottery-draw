@@ -9,10 +9,13 @@ const Controller = {
     $elPage: $('.view-inner'),
     $elLoginPage: $('#login-inner'),        // 登录页面
     $elSignPage: $('#sign-inner'),          // 签到页面
+
     $elLotteryPage: $('#lottery-inner'),    // 抽奖页面
     $elLotteryInput: $('#lottery-inner input'),
     $elLotteryTitleInput: $('#lottery-inner .title'),
     $elLotteryNumberInput: $('#lottery-inner .number'),
+    $elLotteryButton: $('#lottery-operate .button'),
+    $elLotteryOperate: $('#lottery-operate'),
 
     $elLoginBtn: $('#login-button'),
     $elLoginInput: $('#login-input'),
@@ -74,6 +77,7 @@ const Controller = {
         this.$elLoginBtn.on('click', this.handleLogin.bind(this));
         this.$elMenuBtn.on('click', this.handleMenuButton.bind(this));
         this.$elMenuPage.on('click', '.menu-item', this.handleMenu.bind(this));
+        this.$elLotteryButton.on('click', this.handleLotteryButton.bind(this));
     },
 
     // 菜单按钮
@@ -126,6 +130,31 @@ const Controller = {
             return Toast.msg('请输入口令');
         Toast.show();
         this.socketService.socket.emit('password', { password });
+    },
+    // 抽奖按钮事件
+    handleLotteryButton (e) {
+        let type = $(e.target).data('type');
+        switch (type) {
+            // 重置撤销
+            case 'reset':
+                break;
+            // 展示
+            case 'go':
+                break;
+            // 开始
+            case 'start':
+                Toast.confirm({
+                    content: `请确认是否显示到大屏幕？`,
+                }).then((text) => {
+                    text === '确认' && this.$elLotteryOperate.removeClass('start reset go stop').addClass(type);
+                });
+                break;
+            // 停止
+            case 'stop':
+                break;
+        }
+        if (type !== 'go');
+            this.$elLotteryOperate.removeClass('start reset go stop').addClass(type);
     },
     // 页面展示
     switchPage (page) {
