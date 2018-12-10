@@ -10,6 +10,9 @@ const Controller = {
     $elLoginPage: $('#login-inner'),        // 登录页面
     $elSignPage: $('#sign-inner'),          // 签到页面
     $elLotteryPage: $('#lottery-inner'),    // 抽奖页面
+    $elLotteryInput: $('#lottery-inner input'),
+    $elLotteryTitleInput: $('#lottery-inner .title'),
+    $elLotteryNumberInput: $('#lottery-inner .number'),
 
     $elLoginBtn: $('#login-button'),
     $elLoginInput: $('#login-input'),
@@ -30,20 +33,39 @@ const Controller = {
             'menu',
         ],
     },
-    menuData: {
+    prizeData: {
         '0001': {
             type: '0001',
-            title: '签到大屏幕',
+            title: '签到展示',
         },
         '0002': {
             type: '0002',
-            title: '抽取一二三等奖',
+            title: '特等奖',
+            number: '5',
         },
         '0003': {
             type: '0003',
-            title: '随机抽奖',
+            title: '一等奖',
+            number: '5',
+        },
+        '0004': {
+            type: '0004',
+            title: '二等奖',
+            number: '5',
+        },
+        '0005': {
+            type: '0005',
+            title: '三等奖',
+            number: '5',
+        },
+        '0006': {
+            type: '0006',
+            title: '随机大抽奖',
+            number: '0',
         },
     },
+
+
     init () {
         // this.socketService.socket = new Socket();
         // this.socketService.socket.on(this.socketService.event, this);
@@ -53,6 +75,7 @@ const Controller = {
         this.$elMenuBtn.on('click', this.handleMenuButton.bind(this));
         this.$elMenuPage.on('click', '.menu-item', this.handleMenu.bind(this));
     },
+
     // 菜单按钮
     handleMenuButton (e) {
         this.$elMenuPage.toggleClass('show');
@@ -61,7 +84,31 @@ const Controller = {
     // 菜单选择
     handleMenu (e) {
         let type = $(e.target).data('type');
-        this[type] && this[type]();
+        let page = this.$elLotteryPage;
+        switch (type) {
+            // 签到展示
+            case '0001':
+                page = this.$elSignPage;
+                break;
+            // 特等奖
+            case '0002':
+            // 一等奖
+            case '0003':
+            // 二等奖
+            case '0004':
+            // 三等奖
+            case '0005':
+            // 随机大抽奖
+            case '0006':
+                let {
+                    title,
+                    number,
+                } = this.prizeData[type];
+                this.$elLotteryNumberInput.val(number);
+                this.$elLotteryTitleInput.val(title);
+                break;
+        }
+        this.switchPage(page);
         this.handleMenuButton();
     },
     // input聚焦事件
@@ -80,6 +127,13 @@ const Controller = {
         Toast.show();
         this.socketService.socket.emit('password', { password });
     },
+    // 页面展示
+    switchPage (page) {
+        this.$elPage.removeClass('show');
+        page && page.addClass('show');
+    },
+
+
     // 菜单处理
     menuHandle () {
         let {

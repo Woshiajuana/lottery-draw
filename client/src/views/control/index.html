@@ -24,7 +24,7 @@
         </header>
         <main class="view-wrap">
             <!--登录-->
-            <div class="view-inner login-inner show" id="login-inner">
+            <div class="view-inner login-inner" id="login-inner">
                 <div class="input-wrap">
                     <input type="password" maxlength="6" id="login-input" placeholder="口令"/>
                 </div>
@@ -44,18 +44,21 @@
             </div>
             <!--/签到-->
             <!--抽奖-->
-            <div class="view-inner lottery-inner" id="lottery-inner">
+            <div class="view-inner lottery-inner show" id="lottery-inner">
                 <div class="lottery-con">
                     <div class="input-wrap">
-                        <input type="text" maxlength="6" placeholder="标题"/>
+                        <input type="text" class="title" maxlength="6" placeholder="标题"/>
                     </div>
                     <div class="input-wrap">
-                        <input type="tel" maxlength="6" placeholder="抽奖人数"/>
+                        <input type="tel" class="number" maxlength="6" placeholder="抽奖人数"/>
                     </div>
                 </div>
-                <div class="operate">
+                <div class="lottery-operate">
                     <div class="btn button">
                         <span>GO</span>
+                    </div>
+                    <div class="btn button">
+                        <span>START</span>
                     </div>
                 </div>
             </div>
@@ -63,12 +66,12 @@
         </main>
         <nav class="menu-wrap" id="menu-wrap">
             <h2 class="menu-title">菜单</h2>
-            <a href="javascript:;" class="menu-item" data-type="signShowFun">签到展示</a>
-            <a href="javascript:;" class="menu-item" data-type="specialAwardFun">特等奖</a>
-            <a href="javascript:;" class="menu-item" data-type="firstAwardFun">一等奖</a>
-            <a href="javascript:;" class="menu-item" data-type="twoAwardFun">二等奖</a>
-            <a href="javascript:;" class="menu-item" data-type="threeAwardFun">三等奖</a>
-            <a href="javascript:;" class="menu-item" data-type="randomAwardFun">随机大抽奖</a>
+            <a href="javascript:;" class="menu-item" data-type="0001">签到展示</a>
+            <a href="javascript:;" class="menu-item" data-type="0002">特等奖</a>
+            <a href="javascript:;" class="menu-item" data-type="0003">一等奖</a>
+            <a href="javascript:;" class="menu-item" data-type="0004">二等奖</a>
+            <a href="javascript:;" class="menu-item" data-type="0005">三等奖</a>
+            <a href="javascript:;" class="menu-item" data-type="0006">随机大抽奖</a>
         </nav>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
