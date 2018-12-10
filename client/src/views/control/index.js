@@ -48,6 +48,7 @@ const Controller = {
         // this.socketService.socket = new Socket();
         // this.socketService.socket.on(this.socketService.event, this);
         this.$elInput.on('focus', this.handleFocus.bind(this));
+        this.$elInput.on('blur', this.handleBlur.bind(this));
         this.$elLoginBtn.on('click', this.handleLogin.bind(this));
         this.$elMenuBtn.on('click', this.handleMenuButton.bind(this));
         this.$elMenuPage.on('click', '.menu-item', this.handleMenu.bind(this));
@@ -57,8 +58,19 @@ const Controller = {
         this.$elMenuPage.toggleClass('show');
         this.$elMenuBtn.toggleClass('close');
     },
+    // 菜单选择
     handleMenu (e) {
-
+        let type = $(e.target).data('type');
+        this[type] && this[type]();
+        this.handleMenuButton();
+    },
+    // input聚焦事件
+    handleFocus (e) {
+        $(e.target).parents('.input-wrap').addClass('focus');
+    },
+    // input失焦事件
+    handleBlur (e) {
+        $(e.target).parents('.input-wrap').removeClass('focus');
     },
     // 创建登录
     handleLogin () {
