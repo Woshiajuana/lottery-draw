@@ -63,8 +63,8 @@ const Controller = {
         },
         '0006': {
             type: '0006',
-            title: '随机大抽奖',
-            number: '0',
+            title: '',
+            number: '',
         },
     },
 
