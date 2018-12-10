@@ -7,28 +7,91 @@ body{
     background-color: #fff;
 }
 
-.header{
-    padding: j(20) j(20) 0;
-}
-.logo{
-    width: j(78);
-    height: j(31.5);
-}
-.control{
-    @extend %pf;
-    top: j(20);
-    right: j(20);
-    font-size: j(14);
-}
-
-.container{
-    @extend %pr;
-    @extend %h100;
-    @extend %w100;
+.app{
+    @extend %pa;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %b0;
     @extend %oh;
 }
-
-.view-wrap {
+.header-wrap{
+    @extend %pa;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %df;
+    @extend %aic;
+    justify-content: space-between;
+    height: 76px;
+    padding: 0 j(10);
+    z-index: 9;
+}
+.header-logo{
+    width: 78px;
+    height: auto;
+}
+.header-btn{
+    @extend %pr;
+    @extend %cp;
+    width: 46px;
+    height: 46px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 3px 0 rgba(0,0,0,.1);
+    margin-bottom: 10px;
+    &.close{
+        span{
+            &:first-child{
+                top: 22px;
+                transform: rotate(45deg);
+            }
+            &:nth-child(2){
+                width: 0;
+                opacity: 0;
+            }
+            &:last-child{
+                bottom: 22px;
+                transform: rotate(-45deg);
+            }
+        }
+    }
+    span{
+        @extend %pa;
+        @extend %l50;
+        @include tst(all, .3s);
+        margin-left: -8px;
+        width: 16px;
+        height: 2px;
+        background-color: #83b0c9;
+        opacity: 1;
+        &:first-child{
+            top: 16px;
+        }
+        &:nth-child(2){
+            @extend %t50;
+            margin-top: -1px;
+        }
+        &:last-child{
+            bottom: 16px;
+        }
+    }
+}
+.menu-wrap,
+.view-wrap{
+    @extend %pa;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %b0;
+    @extend %oh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.view-inner{
+    @extend %w100;
+}
+.view-inner {
     @extend %pa;
     @extend %dn;
     @extend %t0;
@@ -37,18 +100,26 @@ body{
     @extend %b0;
     @extend %fdc;
     @extend %aic;
+    padding-top: j(100);
     overflow-y: auto;
-    padding-top: j(120);
+    background-color: #fff;
     &.show{
         @extend %df;
     }
 }
 
+.login-inner{
+    .button{
+        margin-top: j(50);
+    }
+}
 .input-wrap{
-    //margin-top: j(120);
     width: j(300);
     height: j(60);
     border-bottom: 1px solid #dedede;
+    &.focus{
+        border-bottom: 1px solid #333;
+    }
     input{
         @extend %w100;
         @extend %h100;
@@ -58,44 +129,39 @@ body{
         font-size: j(24);
         border: none;
     }
-    p{
-        font-size: j(18);
-    }
 }
-
 .button{
     @extend %df;
     @extend %aic;
     @extend %jcc;
     @include tst(all, .3);
-    margin-top: j(50);
     font-size: j(24);
     width: j(80);
     height: j(80);
     border-radius: 50%;
     box-shadow: 0 j(2) j(1) j(2) rgba(0,0,0,.1);
-    &:active{
-        color: #fff;
-        background-color: #dedede;
-    }
 }
 
+.sign-inner{
 
-.menu-wrap,
-.menu-inner{
+}
+.sign-number{
+    font-size: j(88);
+}
+.sign-prompt{
     @extend %df;
     @extend %aic;
-    @extend %fdc;
+    width: j(250);
 }
-.menu-inner{
-    margin-top: 120px;
+.sign-prompt-bar{
+    @extend %df1;
+    height: 1px;
+    background-color: #dedede;
 }
-.menu-item{
-    @extend %cp;
-    line-height: 2;
-    font-size: j(18);
-    color: #333;
-    &:hover{
-        text-decoration: underline;
-    }
+.sign-title{
+    @extend %c6;
+    @extend %db;
+    margin: 0 j(30);
+    font-size: j(14);
 }
+

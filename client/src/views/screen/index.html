@@ -12,27 +12,50 @@
     <script src="assets/lib/flexible.js"></script>
 </head>
 <body>
-    <div class="header">
-        <img src="../../assets/images/html/logo.png" alt="即富" class="logo">
-    </div>
-    <div class="container">
-        <div class="view-wrap login-wrap show" id="login-wrap">
-            <div class="input-wrap">
-                <input type="password" maxlength="6" id="login-input" placeholder="口令"/>
+    <div id="app" class="app">
+        <header class="header-wrap">
+            <img src="../../assets/images/html/logo.png" alt="即富" class="header-logo">
+        </header>
+        <main class="view-wrap">
+            <!--登录-->
+            <div class="view-inner login-inner show" id="login-inner">
+                <div class="input-wrap">
+                    <input type="password" maxlength="6" id="login-input" placeholder="口令"/>
+                </div>
+                <div class="btn button" id="login-button">
+                    <span>GO</span>
+                </div>
             </div>
-            <div class="btn button" id="login-button">
-                <span>GO</span>
+            <!--/登录-->
+            <!--签到-->
+            <div class="view-inner sign-inner" id="sign-inner">
+                <p class="sign-number">55</p>
+                <div class="sign-prompt">
+                    <div class="sign-prompt-bar"></div>
+                    <span class="sign-title">已签到人数</span>
+                    <div class="sign-prompt-bar"></div>
+                </div>
             </div>
-        </div>
-        <div class="view-wrap sign-wrap" id="sign-wrap">
-            <p>签到展示</p>
-        </div>
-        <div class="view-wrap prize-wrap" id="prize-wrap">
-            <p>抽奖123</p>
-        </div>
-        <div class="view-wrap lottery-wrap" id="lottery-wrap">
-            <p>随机抽奖</p>
-        </div>
+            <!--/签到-->
+            <!--抽奖-->
+            <div class="view-inner lottery-inner" id="lottery-inner">
+                <div class="lottery-con">
+                    <div class="input-wrap">
+                        <input type="text" class="title" maxlength="6" placeholder="标题"/>
+                    </div>
+                    <div class="input-wrap">
+                        <input type="tel" class="number" maxlength="6" placeholder="抽奖人数"/>
+                    </div>
+                </div>
+                <div class="lottery-operate go" id="lottery-operate">
+                    <div class="btn button reset" data-type="go"></div>
+                    <div class="btn button go" data-type="start">GO</div>
+                    <div class="btn button start" data-type="stop"></div>
+                    <div class="btn button stop" data-type="go"></div>
+                </div>
+            </div>
+            <!--/抽奖-->
+        </main>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 </body>
