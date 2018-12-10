@@ -12,28 +12,64 @@
     <script src="assets/lib/flexible.js"></script>
 </head>
 <body>
-    <div class="header">
-        <img src="../../assets/images/html/logo.png" alt="即富" class="logo">
-        <div class="control btn">
-            <span>菜单</span>
-        </div>
-    </div>
-    <div class="container">
-        <div class="view-wrap login-wrap show" id="login-wrap">
-            <div class="input-wrap">
-                <input type="password" maxlength="6" id="login-input" placeholder="口令"/>
+
+    <div id="app" class="app">
+        <header class="header-wrap">
+            <img src="../../assets/images/html/logo.png" alt="即富" class="header-logo">
+            <div class="header-btn" id="menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <div class="btn button" id="login-button">
-                <span>GO</span>
+        </header>
+        <main class="view-wrap">
+            <!--登录-->
+            <div class="view-inner login-inner" id="login-inner">
+                <div class="input-wrap">
+                    <input type="password" maxlength="6" id="login-input" placeholder="口令"/>
+                </div>
+                <div class="btn button" id="login-button">
+                    <span>GO</span>
+                </div>
             </div>
-        </div>
-        <div class="view-wrap menu-wrap" id="menu-wrap">
-            <ul class="menu-inner">
-                <li class="menu-item" data-type="0001">签到大屏幕</li>
-                <li class="menu-item" data-type="0002">抽取一二三等奖</li>
-                <li class="menu-item" data-type="0003">随机抽奖</li>
-            </ul>
-        </div>
+            <!--/登录-->
+            <!--签到-->
+            <div class="view-inner sign-inner" id="sign-inner">
+                <p class="sign-number">55</p>
+                <div class="sign-prompt">
+                    <div class="sign-prompt-bar"></div>
+                    <span class="sign-title">已签到人数</span>
+                    <div class="sign-prompt-bar"></div>
+                </div>
+            </div>
+            <!--/签到-->
+            <!--抽奖-->
+            <div class="view-inner lottery-inner show" id="lottery-inner">
+                <div class="lottery-con">
+                    <div class="input-wrap">
+                        <input type="text" maxlength="6" placeholder="标题"/>
+                    </div>
+                    <div class="input-wrap">
+                        <input type="tel" maxlength="6" placeholder="抽奖人数"/>
+                    </div>
+                </div>
+                <div class="operate">
+                    <div class="btn button">
+                        <span>GO</span>
+                    </div>
+                </div>
+            </div>
+            <!--/抽奖-->
+        </main>
+        <nav class="menu-wrap" id="menu-wrap">
+            <h2 class="menu-title">菜单</h2>
+            <a href="javascript:;" class="menu-item">签到大屏幕</a>
+            <a href="javascript:;" class="menu-item">特等奖</a>
+            <a href="javascript:;" class="menu-item">一等奖</a>
+            <a href="javascript:;" class="menu-item">二等奖</a>
+            <a href="javascript:;" class="menu-item">三等奖</a>
+            <a href="javascript:;" class="menu-item">随机大抽奖</a>
+        </nav>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 </body>

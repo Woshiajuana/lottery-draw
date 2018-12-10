@@ -4,10 +4,19 @@ import Socket           from 'utils/socket.util'
 
 // 登录控制器
 const Controller = {
-    $elPage: $('#login-wrap'),
-    $elMenuPage: $('#menu-wrap'),
-    $elBtn: $('#login-button'),
-    $elInput: $('#login-input'),
+    $elInput: $('input'),
+
+    $elPage: $('.view-inner'),
+    $elLoginPage: $('#login-inner'),        // 登录页面
+    $elSignPage: $('#sign-inner'),          // 签到页面
+    $elLotteryPage: $('#lottery-inner'),    // 抽奖页面
+
+    $elLoginBtn: $('#login-button'),
+    $elLoginInput: $('#login-input'),
+
+    $elMenuBtn: $('#menu-btn'),             // 菜单按钮
+    $elMenuPage: $('#menu-wrap'),           // 菜单页面
+
     socketService: {
         is: false,
         socket: null,
@@ -36,17 +45,20 @@ const Controller = {
         },
     },
     init () {
-        this.socketService.socket = new Socket();
-        this.socketService.socket.on(this.socketService.event, this);
-        this.$elBtn.on('click', this.handleLogin.bind(this));
+        // this.socketService.socket = new Socket();
+        // this.socketService.socket.on(this.socketService.event, this);
+        this.$elInput.on('focus', this.handleFocus.bind(this));
+        this.$elLoginBtn.on('click', this.handleLogin.bind(this));
+        this.$elMenuBtn.on('click', this.handleMenuButton.bind(this));
         this.$elMenuPage.on('click', '.menu-item', this.handleMenu.bind(this));
     },
-    // 菜单控制
+    // 菜单按钮
+    handleMenuButton (e) {
+        this.$elMenuPage.toggleClass('show');
+        this.$elMenuBtn.toggleClass('close');
+    },
     handleMenu (e) {
-        let $elItem = $(e.target);
-        let type = $elItem.data('type');
-        let data = this.menuData[type];
-        this.socketService.socket.emit('menu', data);
+
     },
     // 创建登录
     handleLogin () {

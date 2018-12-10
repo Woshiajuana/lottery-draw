@@ -70,7 +70,10 @@ io.on('connection', (socket) => {
 
 });
 
-function check
+function verifyIdentity (socket, sockets) {
+    let result = false;
+    verifyIdentity()
+}
 
 function broadcastSocket(sockets, event, data) {
     let result = false;
