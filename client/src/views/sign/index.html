@@ -12,16 +12,32 @@
     <script src="assets/lib/flexible.js"></script>
 </head>
 <body>
-    <div class="header">
-        <img src="../../assets/images/html/logo.png" alt="即富" class="logo">
-    </div>
-    <div class="container">
-        <div class="input-wrap">
-            <input type="text" maxlength="6" placeholder="验证码"/>
-        </div>
-        <div class="btn button">
-            <span>签</span>
-        </div>
+    <div id="app" class="app">
+        <header class="header-wrap">
+            <img src="../../assets/images/html/logo.png" alt="即富" class="header-logo">
+        </header>
+        <main class="view-wrap">
+            <!--登录-->
+            <div class="view-inner login-inner show" id="login-inner">
+                <div class="input-wrap">
+                    <input type="password" maxlength="6" id="login-input" placeholder="验证码"/>
+                </div>
+                <div class="btn button" id="login-button">
+                    <span>GO</span>
+                </div>
+            </div>
+            <!--/登录-->
+            <!--签到-->
+            <div class="view-inner sign-inner" id="sign-inner">
+                <p class="sign-number">55</p>
+                <div class="sign-prompt">
+                    <div class="sign-prompt-bar"></div>
+                    <span class="sign-title">您已成功签到</span>
+                    <div class="sign-prompt-bar"></div>
+                </div>
+            </div>
+            <!--/签到-->
+        </main>
     </div>
 </body>
 </html>

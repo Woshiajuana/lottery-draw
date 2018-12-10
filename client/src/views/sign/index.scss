@@ -7,25 +7,97 @@ body{
     background-color: #fff;
 }
 
-.header{
-    padding: j(20) j(20) 0;
+.app{
+    @extend %pa;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %b0;
+    @extend %oh;
 }
-.logo{
-    width: j(78);
-    height: j(31.5);
+.header-wrap{
+    @extend %pa;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %df;
+    @extend %aic;
+    justify-content: space-between;
+    height: 76px;
+    padding: 0 j(10);
+    z-index: 9;
+}
+.header-logo{
+    width: 78px;
+    height: auto;
 }
 
-.container{
-    @extend %df;
+.view-wrap{
+    @extend %pa;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %b0;
+    @extend %oh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.view-inner{
+    @extend %w100;
+}
+.view-inner {
+    @extend %pa;
+    @extend %dn;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %b0;
     @extend %fdc;
     @extend %aic;
+    padding-top: j(100);
+    overflow-y: auto;
+    background-color: #fff;
+    &.show{
+        @extend %df;
+    }
 }
 
+
+sign-inner{
+
+}
+.sign-number{
+    font-size: j(88);
+}
+.sign-prompt{
+    @extend %df;
+    @extend %aic;
+    width: j(250);
+}
+.sign-prompt-bar{
+    @extend %df1;
+    height: 1px;
+    background-color: #dedede;
+}
+.sign-title{
+    @extend %c6;
+    @extend %db;
+    margin: 0 j(30);
+    font-size: j(14);
+}
+
+.login-inner{
+    .button{
+        margin-top: j(50);
+    }
+}
 .input-wrap{
-    margin-top: j(120);
     width: j(300);
     height: j(60);
     border-bottom: 1px solid #dedede;
+    &.focus{
+        border-bottom: 1px solid #333;
+    }
     input{
         @extend %w100;
         @extend %h100;
@@ -36,20 +108,48 @@ body{
         border: none;
     }
 }
-
 .button{
     @extend %df;
     @extend %aic;
     @extend %jcc;
-    margin-top: j(50);
+    @include tst(all, .3);
     font-size: j(24);
-    width: j(100);
-    height: j(100);
+    width: j(80);
+    height: j(80);
     border-radius: 50%;
-    border: 1px solid #fefefe;
-    box-shadow: 0 j(2) j(1) rgba(0,0,0,.1);
+    box-shadow: 0 j(2) j(1) j(2) rgba(0,0,0,.1);
     &:active{
         color: #fff;
         background-color: #dedede;
     }
+    &.start{
+        background: url("../../assets/images/css/start.png") center no-repeat;
+        background-size: j(30);
+        &:active{
+            color: #fff;
+            background-color: #dedede;
+        }
+    }
+    &.reset{
+        background: url("../../assets/images/css/reset.png") center no-repeat;
+        background-size: j(30);
+        &:active{
+            color: #fff;
+            background-color: #dedede;
+        }
+
+    }
+    &.stop{
+        background: url("../../assets/images/css/stop.png") center no-repeat;
+        background-size: j(30);
+        &:active{
+            color: #fff;
+            background-color: #dedede;
+        }
+    }
 }
+
+.hidden{
+    @extend %oh;
+}
+
