@@ -70,6 +70,8 @@ io.on('connection', (socket) => {
 
 });
 
+function check
+
 function broadcastSocket(sockets, event, data) {
     let result = false;
     for (let key in sockets) {
