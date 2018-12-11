@@ -25,8 +25,8 @@ const Controller = {
         ],
     },
     init () {
-        this.socketService.socket = new Socket();
-        this.socketService.socket.on(this.socketService.event, this);
+        // this.socketService.socket = new Socket();
+        // this.socketService.socket.on(this.socketService.event, this);
         this.$elBtn.on('click', this.handleLogin.bind(this));
     },
     // 创建登录
@@ -34,6 +34,10 @@ const Controller = {
         let password = this.$elInput.val();
         if (!password)
             return Toast.msg('请输入口令');
+        if (!this.socketService.socket) {
+            this.socketService.socket = new Socket();
+            this.socketService.socket.on(this.socketService.event, this);
+        }
         Toast.show();
         this.socketService.socket.emit('password', { password });
     },
