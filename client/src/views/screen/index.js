@@ -39,21 +39,17 @@ const Controller = {
             this.socketService.socket.on(this.socketService.event, this);
         }
         Toast.show();
-        this.socketService.socket.emit('password', { password });
+        this.socketService.socket.emit('loginEvent', { password });
     },
-    // 验证密码结果 验证口令
-    passwordHandle (result, socket) {
-        let {
-            code,
-            msg,
-        } = result;
-        if (code === '0000') {
-            this.$elLoginPage.removeClass('show');
+    // 页面展示
+    switchPage (page) {
+        this.$elPage.removeClass('show');
+        if (page === this.$elLoginPage) {
+            this.$elMenuBtn.addClass('hidden');
         } else {
-            this.$elLoginPage.addClass('show');
+            this.$elMenuBtn.removeClass('hidden');
         }
-        Toast.hide();
-        Toast.msg(msg);
+        page && page.addClass('show');
     },
     menuHandle (result, socket) {
         let {
@@ -78,6 +74,18 @@ const Controller = {
                 this.$elLotteryPage.addClass('show');
                 break;
         }
-    }
+    },
+    // 断开链接
+    disconnectHandle (data) {
+        console.log('断开链接', data);
+        let {
+            code,
+            message,
+        } = data;
+        this.socketService.socket = null;
+        this.switchPage(this.$elLoginPage);
+        Toast.hide();
+        Toast.msg(message);
+    },
 };
 Controller.init();

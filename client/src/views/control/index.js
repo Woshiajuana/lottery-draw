@@ -133,10 +133,10 @@ const Controller = {
             this.socketService.socket = new Socket();
             this.socketService.socket.on(this.socketService.event, this);
         }
-        this.socketService.socket.on('loginevent', (res) => {
+        this.socketService.socket.on('loginEvent', (res) => {
             console.log(res)
         });
-        this.socketService.socket.emit('loginevent', { password });
+        this.socketService.socket.emit('loginEvent', { password });
     },
     // 抽奖按钮事件
     handleLotteryButton (e) {
@@ -175,26 +175,16 @@ const Controller = {
     },
 
 
+    // 信息数据处理
+    messageHandle (data) {
+        console.log('信息数据处理', data);
+    },
     // 菜单处理
     menuHandle () {
         let {
             code,
             msg,
         } = data;
-        Toast.msg(msg);
-    },
-    // 验证密码结果 验证口令
-    passwordHandle (data, socket) {
-        let {
-            code,
-            msg,
-        } = data;
-        if (code === '0000') {
-            this.switchPage(this.$elSignPage);
-        } else {
-            this.switchPage(this.$elLoginPage);
-        }
-        Toast.hide();
         Toast.msg(msg);
     },
     // 断开链接
