@@ -133,7 +133,10 @@ const Controller = {
             this.socketService.socket = new Socket();
             this.socketService.socket.on(this.socketService.event, this);
         }
-        this.socketService.socket.emit('password', { password });
+        this.socketService.socket.on('loginevent', (res) => {
+            console.log(res)
+        });
+        this.socketService.socket.emit('loginevent', { password });
     },
     // 抽奖按钮事件
     handleLotteryButton (e) {
@@ -197,10 +200,14 @@ const Controller = {
     // 断开链接
     disconnectHandle (data) {
         console.log('断开链接', data);
+        let {
+            code,
+            message,
+        } = data;
         this.socketService.socket = null;
         this.switchPage(this.$elLoginPage);
         Toast.hide();
-        Toast.msg(data.msg);
+        Toast.msg(message);
     },
     // 链接错误
     errorHandle () {

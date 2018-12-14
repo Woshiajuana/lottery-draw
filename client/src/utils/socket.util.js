@@ -13,6 +13,8 @@ class Socket {
             event.forEach((e = '') => {
                 let handle = `${e}Handle`;
                 this.socket.on(e, (data) => {
+                    if (data && typeof data === 'string')
+                        data = JSON.parse(data);
                     callback[handle] && callback[handle](data, this);
                 });
             });
