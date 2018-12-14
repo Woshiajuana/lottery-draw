@@ -16,11 +16,16 @@ const Controller = {
         let value = this.$elLoginInput.val().trim();
         if (!value)
             return Toast.msg('请输入验证码');
+        let body = {
+            nums: value,
+            user: {
+                openId: '123',
+                nickName: '哈哈',
+            },
+        };
         Http({
             url: 'lottery/user_sign',
-            data: {
-
-            }
+            data: body,
         }).then((res) => {
             console.log(res);
         }).catch((err) => {
