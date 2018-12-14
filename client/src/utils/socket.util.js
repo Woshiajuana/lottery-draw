@@ -2,7 +2,8 @@ import Config           from 'config/env.config'
 
 class Socket {
     constructor () {
-        this.socket = io(Config.SOCKET_URL);
+        // this.socket = io(Config.SOCKET_URL);
+        this.socket = io.connect(Config.SOCKET_URL);
     }
     // 事件注册
     on (event, callback) {
@@ -22,8 +23,10 @@ class Socket {
         return this;
     }
     // 发送消息
-    emit (event, data) {
-        this.socket.emit(event, data);
+    emit (event, data, callback) {
+        if (typeof data === 'object')
+            data = JSON.stringify(data);
+        this.socket.emit(event, data, callback);
         return this;
     }
 }

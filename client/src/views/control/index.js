@@ -34,6 +34,7 @@ const Controller = {
             'disconnect',
             'password',
             'menu',
+            'loginEvent',
         ],
     },
     prizeData: {
@@ -133,10 +134,9 @@ const Controller = {
             this.socketService.socket = new Socket();
             this.socketService.socket.on(this.socketService.event, this);
         }
-        this.socketService.socket.on('loginEvent', (res) => {
-            console.log(res)
+        this.socketService.socket.emit('loginEvent', {password}, function (data) {
+            console.log(data);
         });
-        this.socketService.socket.emit('loginEvent', { password });
     },
     // 抽奖按钮事件
     handleLotteryButton (e) {
@@ -163,7 +163,7 @@ const Controller = {
         if (type !== 'go');
             this.$elLotteryOperate.removeClass('start reset go stop').addClass(type);
     },
-    // 页面展示
+    // 页面展示this
     switchPage (page) {
         this.$elPage.removeClass('show');
         if (page === this.$elLoginPage) {
@@ -174,6 +174,10 @@ const Controller = {
         page && page.addClass('show');
     },
 
+    // 登录事件处理
+    loginEventHandle (data) {
+        console.log('登录处理', data);
+    },
 
     // 信息数据处理
     messageHandle (data) {
