@@ -1,9 +1,10 @@
 import Config           from 'config/env.config'
 
 class Socket {
-    constructor () {
+    constructor (ctx) {
         // this.socket = io(Config.SOCKET_URL);
         this.socket = io.connect(Config.SOCKET_URL);
+        this.ctx = ctx;
     }
     // 事件注册
     on (event, callback) {
@@ -16,17 +17,23 @@ class Socket {
                 this.socket.on(e, (data) => {
                     if (data && typeof data === 'string')
                         data = JSON.parse(data);
-                    callback[handle] && callback[handle](data, this);
+                    callback[handle] && callback[handle](data, this.socket);
                 });
             });
         }
         return this;
     }
     // 发送消息
-    emit (event, data, callback) {
+    emit (event, data) {
         if (typeof data === 'object')
             data = JSON.stringify(data);
-        this.socket.emit(event, data, callback);
+        this.socket.emit(event, data, (data) => {
+            console.log(data)
+            if (data && typeof data === 'string')
+                data = JSON.parse(data);
+            let handle = `${event}Handle`;
+            this.ctx && this.ctx[handle] && this.ctx[handle](data, this.socket);
+        });
         return this;
     }
 }

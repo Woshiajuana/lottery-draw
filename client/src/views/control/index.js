@@ -27,14 +27,10 @@ const Controller = {
         is: false,
         socket: null,
         event: [
-            'success',
             'error',
             'close',
             'message',
             'disconnect',
-            'password',
-            'menu',
-            'loginEvent',
         ],
     },
     prizeData: {
@@ -131,12 +127,10 @@ const Controller = {
             return Toast.msg('请输入口令');
         Toast.show();
         if (!this.socketService.socket) {
-            this.socketService.socket = new Socket();
+            this.socketService.socket = new Socket(this);
             this.socketService.socket.on(this.socketService.event, this);
         }
-        this.socketService.socket.emit('loginEvent', {password}, function (data) {
-            console.log(data);
-        });
+        this.socketService.socket.emit('loginEvent', {password});
     },
     // 抽奖按钮事件
     handleLotteryButton (e) {
@@ -176,7 +170,17 @@ const Controller = {
 
     // 登录事件处理
     loginEventHandle (data) {
-        console.log('登录处理', data);
+        let {
+            code,
+            msg,
+        } = data;
+        if (code === '0000') {
+            this.switchPage(this.$elSignPage);
+        } else {
+            this.switchPage(this.$elLoginPage);
+        }
+        Toast.hide();
+        Toast.msg(msg);
     },
 
     // 信息数据处理
@@ -192,7 +196,7 @@ const Controller = {
         Toast.msg(msg);
     },
     // 断开链接
-    disconnectHandle (data) {
+    disconnectHandle (data = '') {
         console.log('断开链接', data);
         let {
             code,
@@ -201,7 +205,7 @@ const Controller = {
         this.socketService.socket = null;
         this.switchPage(this.$elLoginPage);
         Toast.hide();
-        Toast.msg(message);
+        message && Toast.msg(message);
     },
     // 链接错误
     errorHandle () {
