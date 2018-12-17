@@ -180,10 +180,12 @@ const Controller = {
             // 开始
             case 'start':
                 this.consoleSendData.type = '1';
+                console.log(1)
                 this.socketService.socket.emit('luckEvent', this.consoleSendData);
                 break;
             // 停止
             case 'stop':
+                console.log(2)
                 this.consoleSendData.type = '0';
                 this.socketService.socket.emit('luckEvent', this.consoleSendData);
                 this.$elInput.prop('disabled', false);
@@ -235,7 +237,7 @@ const Controller = {
         this.$elSignNumber.text(nums);
     },
     // 抽奖事件
-    luckEvent (data) {
+    luckEventHandle (data) {
         console.log('签到事件', data);
         let {
             code,

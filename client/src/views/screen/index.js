@@ -26,6 +26,8 @@ const Controller = {
         index: -1,
     },
 
+    lotteryTimer: null,
+
     socketService: {
         is: false,
         socket: null,
@@ -35,7 +37,7 @@ const Controller = {
             'disconnect',
             'signEvent',
             'screenAcceptEvent',
-            'luckEvent',
+            'luckShowEvent',
         ],
     },
     init () {
@@ -74,8 +76,9 @@ const Controller = {
     },
 
     // 抽奖事件
-    luckEventHandle (data) {
+    luckShowEventHandle (data) {
         console.log('抽奖事件', data)
+        this.screenAcceptEventHandle(data);
     },
 
     // 登录事件处理
@@ -127,6 +130,7 @@ const Controller = {
     // 大屏幕信息接收事件
     screenAcceptEventHandle (data) {
         console.log('大屏幕信息接收事件', data);
+        clearInterval(this.lotteryTimer);
         let {
             scene,
             type,
@@ -148,10 +152,28 @@ const Controller = {
             case '0005':
             // 随机大抽奖
             case '0006':
-                this.switchPage(this.$elLotteryPage);
-                this.showLotteryDiv(title, number);
+                if (type === '2') {
+                    this.switchPage(this.$elLotteryPage);
+                    this.showLotteryDiv(title, number);
+                    this.lotteryStart();
+                } else if (type === '1') {
+                    this.lotteryStart();
+                } else if (type === '0') {
+                    clearInterval(this.lotteryTimer);
+                }
                 break;
         }
+    },
+
+    lotteryStart () {
+        let index = 0;
+        this.lotteryTimer = setInterval(() => {
+            index++;
+            this.$elLotteryPage.find('.lottery-item').each(function () {
+                $(this).find('img').prop('src', 'http://www.owulia.com/static/temp/5.jpg');
+                $(this).find('span').text(index);
+            })
+        },60)
     },
 
     // 展示奖品人数
