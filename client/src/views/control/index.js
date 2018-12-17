@@ -9,6 +9,7 @@ const Controller = {
     $elPage: $('.view-inner'),
     $elLoginPage: $('#login-inner'),        // 登录页面
     $elSignPage: $('#sign-inner'),          // 签到页面
+    $elHomePage: $('#home-inner'),          // 欢迎页面
 
     $elLotteryPage: $('#lottery-inner'),    // 抽奖页面
     $elLotteryInput: $('#lottery-inner input'),
@@ -90,6 +91,8 @@ const Controller = {
             // 签到展示
             case '0001':
                 page = this.$elSignPage;
+                console.log(1)
+                this.socketService.socket.emit('signEvent', {});
                 break;
             // 特等奖
             case '0002':
@@ -175,12 +178,16 @@ const Controller = {
             message,
         } = data;
         if (code === '0000') {
-            this.switchPage(this.$elSignPage);
+            this.switchPage(this.$elHomePage);
         } else {
             this.switchPage(this.$elLoginPage);
         }
         Toast.hide();
         Toast.msg(message);
+    },
+    // 签到事件处理
+    signEventHandle (data) {
+        console.log(data);
     },
 
     // 信息数据处理
@@ -196,7 +203,7 @@ const Controller = {
         Toast.msg(msg);
     },
     // 断开链接
-    disconnectHandle (data = '') {
+    disconnectHandle (data = '', socket) {
         console.log('断开链接', data);
         let {
             code,

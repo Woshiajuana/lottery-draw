@@ -196,12 +196,16 @@ body{
     }
 }
 
+.home-prompt{
+    font-size: j(18);
+}
 .sign-inner{
 
 }
 .sign-number{
     font-size: j(88);
 }
+
 .sign-prompt{
     @extend %df;
     @extend %aic;
