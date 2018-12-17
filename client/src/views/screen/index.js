@@ -65,7 +65,6 @@ const Controller = {
 
     // 登录事件处理
     loginEventHandle (data) {
-        console.log(11)
         let {
             code,
             message,
@@ -84,7 +83,30 @@ const Controller = {
     },
     // 大屏幕信息接收事件
     screenAcceptEvent (data) {
-        console.log('大屏幕信息接收事件', data);
+        let {
+            scene,
+            type,
+            title,
+            number,
+        } = data;
+        switch (scene) {
+            // 签到展示
+            case '0001':
+                this.switchPage(this.$elSignPage);
+                break;
+            // 特等奖
+            case '0002':
+            // 一等奖
+            case '0003':
+            // 二等奖
+            case '0004':
+            // 三等奖
+            case '0005':
+            // 随机大抽奖
+            case '0006':
+                this.switchPage(this.$elLotteryPage);
+                break;
+        }
     },
 
 

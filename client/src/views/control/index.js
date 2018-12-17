@@ -151,37 +151,28 @@ const Controller = {
     // 抽奖按钮事件
     handleLotteryButton (e) {
         let type = $(e.target).data('type');
+        let number = this.$elLotteryNumberInput.val().trim();
+        let title = this.$elLotteryTitleInput.val().trim();
         switch (type) {
             // 重置撤销
             case 'reset':
                 break;
             // 展示
             case 'go':
-                let number = this.$elLotteryNumberInput.val().trim();
-                let title = this.$elLotteryTitleInput.val().trim();
-                if (!number || !title)
-                    return Toast.msg('请把参数填写完成');
-                this.consoleSendData = {
-                    ...this.consoleSendData,
-                    type: '2',
-                    title,
-                    number,
-                };
-                this.socketService.socket.emit('consoleSendEvent', this.consoleSendData);
+
                 break;
             // 开始
             case 'start':
+                if (!number || !title)
+                    return Toast.msg('请把参数填写完成');
                 Toast.confirm({
                     content: `请确认是否显示到大屏幕？`,
                 }).then((text) => {
                     if (text !== '确认')
                         return;
-                    this.socketService.socket.emit('consoleSendEvent', {
-                        scene: '0001',
-                        type: '2',
-                        title: '签到',
-                    });
-                    this.$elLotteryOperate.removeClass('start reset go stop').addClass(type);
+                    this.consoleSendData.title = title;
+                    this.consoleSendData.number = number;
+                    this.socketService.socket.emit('consoleSendEvent', this.consoleSendData);
                 });
                 break;
             // 停止
