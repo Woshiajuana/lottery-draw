@@ -6,11 +6,11 @@ import Socket           from 'utils/socket.util'
 const Controller = {
     $elInput: $('input'),
 
-    $elPage: $('.view-wrap'),
-    $elLoginPage: $('#login-wrap'),
-    $elSignPage: $('#sign-wrap'),
-    $elPrizePage: $('#prize-wrap'),
-    $elLotteryPage: $('#lottery-wrap'),
+    $elPage: $('.view-inner'),
+    $elLoginPage: $('#login-inner'),
+    $elSignPage: $('#sign-inner'),
+    $elPrizePage: $('#prize-inner'),
+    $elLotteryPage: $('#lottery-inner'),
     $elHomePage: $('#home-inner'),          // 欢迎页面
 
 
@@ -82,7 +82,8 @@ const Controller = {
         console.log('签到事件', data);
     },
     // 大屏幕信息接收事件
-    screenAcceptEvent (data) {
+    screenAcceptEventHandle (data) {
+        console.log('大屏幕信息接收事件', data);
         let {
             scene,
             type,

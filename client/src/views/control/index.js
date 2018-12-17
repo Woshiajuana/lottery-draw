@@ -24,6 +24,8 @@ const Controller = {
     $elMenuBtn: $('#menu-btn'),             // 菜单按钮
     $elMenuPage: $('#menu-wrap'),           // 菜单页面
 
+    $elSignNumber: $('#sign-number'),
+
     socketService: {
         is: false,
         socket: null,
@@ -32,6 +34,7 @@ const Controller = {
             'close',
             'disconnect',
             'loginEvent',
+            'signEvent',
         ],
     },
     prizeData: {
@@ -212,21 +215,25 @@ const Controller = {
         console.log('签到事件处理', data);
     },
     // 控制器指令触发事件
-    consoleSendEventHandle (data) {
-        console.log('控制器指令触发事件', data);
+    consoleSendEventHandle (data = '') {
+        let {
+            code,
+            message,
+        } = data;
+        if(code !== '000' && message) Toast.msg(message);
+    },
+    // 签到事件
+    signEventHandle (data) {
+        console.log('签到事件', data);
+        let {
+            nums
+        } = data;
+        this.$elSignNumber.text(nums);
     },
 
     // 信息数据处理
     messageHandle (data) {
         console.log('信息数据处理', data);
-    },
-    // 菜单处理
-    menuHandle () {
-        let {
-            code,
-            msg,
-        } = data;
-        Toast.msg(msg);
     },
     // 断开链接
     disconnectHandle (data = '', socket) {
