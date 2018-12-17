@@ -30,7 +30,6 @@ const Controller = {
         event: [
             'error',
             'close',
-            'message',
             'disconnect',
         ],
     },
@@ -91,7 +90,6 @@ const Controller = {
             // 签到展示
             case '0001':
                 page = this.$elSignPage;
-                console.log(1)
                 this.socketService.socket.emit('signEvent', {});
                 break;
             // 特等奖
@@ -125,7 +123,7 @@ const Controller = {
     },
     // 创建登录
     handleLogin () {
-        let password = this.$elInput.val();
+        let password = this.$elLoginInput.val();
         if (!password)
             return Toast.msg('请输入口令');
         Toast.show();
