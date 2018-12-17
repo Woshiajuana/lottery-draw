@@ -15,6 +15,7 @@ class Socket {
             event.forEach((e = '') => {
                 let handle = `${e}Handle`;
                 this.socket.on(e, (data) => {
+                    console.log(data);
                     if (data && typeof data === 'string')
                         data = JSON.parse(data);
                     callback[handle] && callback[handle](data, this.socket);
@@ -28,7 +29,7 @@ class Socket {
         if (typeof data === 'object')
             data = JSON.stringify(data);
         this.socket.emit(event, data, (data) => {
-            console.log(data)
+            console.log(data);
             if (data && typeof data === 'string')
                 data = JSON.parse(data);
             let handle = `${event}Handle`;

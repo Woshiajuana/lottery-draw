@@ -172,7 +172,7 @@ const Controller = {
     loginEventHandle (data) {
         let {
             code,
-            msg,
+            message,
         } = data;
         if (code === '0000') {
             this.switchPage(this.$elSignPage);
@@ -180,7 +180,7 @@ const Controller = {
             this.switchPage(this.$elLoginPage);
         }
         Toast.hide();
-        Toast.msg(msg);
+        Toast.msg(message);
     },
 
     // 信息数据处理
