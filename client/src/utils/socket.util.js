@@ -3,7 +3,7 @@ import Config           from 'config/env.config'
 class Socket {
     constructor (ctx) {
         // this.socket = io(Config.SOCKET_URL);
-        this.socket = io.connect(Config.SOCKET_URL);
+        this.socket = io.connect(Config.SOCKET_URL, {reconnect: true});
         this.ctx = ctx;
     }
     // 事件注册

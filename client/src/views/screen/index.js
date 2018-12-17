@@ -24,6 +24,7 @@ const Controller = {
     signUser: {
         numbers: [],
         index: -1,
+        totals: [],
     },
 
     lotteryTimer: null,
@@ -99,6 +100,7 @@ const Controller = {
     signEventHandle (data) {
         console.log('签到事件', data);
         this.signUser.numbers.push(data);
+        this.signUser.totals.push(data);
     },
 
     // 展示签到
@@ -152,13 +154,10 @@ const Controller = {
             case '0005':
             // 随机大抽奖
             case '0006':
-                if (type === '2') {
-                    this.switchPage(this.$elLotteryPage);
-                    this.showLotteryDiv(title, number);
-                } else if (type === '1') {
+                this.switchPage(this.$elLotteryPage);
+                this.showLotteryDiv(title, number);
+                if (type === '1') {
                     this.lotteryStart();
-                } else if (type === '0') {
-                    clearInterval(this.lotteryTimer);
                 }
                 break;
         }
@@ -167,8 +166,8 @@ const Controller = {
     lotteryStart () {
         let index = 0;
         this.lotteryTimer = setInterval(() => {
-            index++;
             this.$elLotteryPage.find('.lottery-item').each(function () {
+                index++;
                 $(this).find('img').prop('src', 'http://www.owulia.com/static/temp/5.jpg');
                 $(this).find('span').text(index);
             })
