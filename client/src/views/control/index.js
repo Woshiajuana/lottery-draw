@@ -117,7 +117,7 @@ const Controller = {
                 let {
                     title,
                     number,
-                } = this.prizeData[type];
+                } = this.prizeData[scene];
                 this.$elLotteryNumberInput.val(number);
                 this.$elLotteryTitleInput.val(title);
                 this.consoleSendData = {

@@ -93,6 +93,7 @@ const Controller = {
         this.signUser.numbers.push(data);
     },
 
+    // 展示签到
     signUserShowPop () {
         let {
             index,
@@ -143,8 +144,25 @@ const Controller = {
             // 随机大抽奖
             case '0006':
                 this.switchPage(this.$elLotteryPage);
+                this.showLotteryDiv(title, number);
                 break;
         }
+    },
+
+    // 展示奖品人数
+    showLotteryDiv (title, number) {
+        this.$elLotteryPage.find('.lottery-title').text(title);
+        let html = '';
+        for (let index = 0; index < parseInt(number); index++) {
+            html += `
+            <div class="lottery-item">
+                <div class="lottery-info">
+                    <img src="assets/images/html/user_default_icon.png" alt="">
+                </div>
+                <span>幸运儿</span>
+            </div>`;
+        }
+        this.$elLotteryPage.find('.lottery-con').html(html);
     },
 
 

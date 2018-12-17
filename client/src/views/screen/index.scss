@@ -206,3 +206,52 @@ body{
         border-radius: 50%;
     }
 }
+
+.lottery-inner{
+    @extend %jcc;
+    padding-top: 0;
+}
+.lottery-title{
+    font-size: j(30);
+    margin-bottom: j(50);
+    height: j(50);
+    line-height: j(50);
+}
+.lottery-con{
+    @extend %w100;
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    //@extend %df1;
+    flex-wrap: wrap;
+    width: j(500);
+}
+.lottery-item{
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    @extend %fdc;
+    width: j(80);
+    height: j(80);
+    margin: j(10);
+    span{
+        font-size: j(18);
+        color: #333;
+        margin-top: j(20);
+    }
+}
+.lottery-info{
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    @extend %bsb;
+    width: j(50);
+    height: j(50);
+    border-radius: 50%;
+    border: 2px solid #fff;
+    img{
+        width: j(40);
+        height: j(40);
+        border-radius: 50%;
+    }
+}
