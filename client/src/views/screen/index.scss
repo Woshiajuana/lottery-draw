@@ -168,3 +168,39 @@ body{
     font-size: j(14);
 }
 
+.sign-pop{
+    @extend %pa;
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    @extend %fdc;
+    @extend %t50;
+    @extend %l50;
+    margin-top: j(-120);
+    margin-left: j(-120);
+    width: j(240);
+    height: j(240);
+    background-color: rgba(0,0,0,0.3);
+    border-radius: j(8);
+    span{
+        font-size: j(18);
+        color: #fff;
+        margin-top: j(20);
+    }
+}
+.sign-img{
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    @extend %bsb;
+    width: j(110);
+    height: j(110);
+    border-radius: 50%;
+    border: 2px solid #fff;
+    img{
+        width: j(100);
+        height: j(100);
+        border-radius: 50%;
+        background-color: red;
+    }
+}

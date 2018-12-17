@@ -17,6 +17,14 @@ const Controller = {
     $elLoginBtn: $('#login-button'),
     $elLoginInput: $('#login-input'),
 
+    $elSignUserPop: $('#sign-pop'),
+
+
+    signUser: {
+        numbers: [],
+        index: -1,
+    },
+
     socketService: {
         is: false,
         socket: null,
@@ -34,6 +42,8 @@ const Controller = {
         this.$elInput.on('focus', this.handleFocus.bind(this));
         this.$elInput.on('blur', this.handleBlur.bind(this));
         this.$elLoginBtn.on('click', this.handleLogin.bind(this));
+
+        this.signUserShowPop();
     },
     // 创建登录
     handleLogin () {
@@ -62,7 +72,6 @@ const Controller = {
     },
 
 
-
     // 登录事件处理
     loginEventHandle (data) {
         let {
@@ -80,7 +89,34 @@ const Controller = {
     // 签到事件
     signEventHandle (data) {
         console.log('签到事件', data);
+        this.signUser.numbers.push(data);
     },
+
+    signUserShowPop () {
+        let {
+            index,
+            numbers,
+        } = this.signUser;
+        index++;
+        let user = numbers[index];
+        if (user && this.$elSignPage.hasClass('show')) {
+            let {
+                headImgUrl,
+                nickName,
+            } = user;
+            this.$elSignUserPop.find('img').prop('src', headImgUrl);
+            this.$elSignUserPop.find('span').text(nickName);
+            this.$elSignUserPop.show();
+            this.signUser.index = index;
+            setTimeout(() => {
+                this.$elSignUserPop.hide();
+            },3000);
+        }
+        setTimeout(() => {
+            this.signUserShowPop();
+        }, 5000);
+    },
+
     // 大屏幕信息接收事件
     screenAcceptEventHandle (data) {
         console.log('大屏幕信息接收事件', data);
