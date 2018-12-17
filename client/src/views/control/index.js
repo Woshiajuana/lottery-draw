@@ -180,12 +180,10 @@ const Controller = {
             // 开始
             case 'start':
                 this.consoleSendData.type = '1';
-                console.log(1)
-                this.socketService.socket.emit('luckEvent', this.consoleSendData);
+                this.socketService.socket.emit('consoleSendEvent', this.consoleSendData);
                 break;
             // 停止
             case 'stop':
-                console.log(2)
                 this.consoleSendData.type = '0';
                 this.socketService.socket.emit('luckEvent', this.consoleSendData);
                 this.$elInput.prop('disabled', false);

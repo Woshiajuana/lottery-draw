@@ -155,7 +155,6 @@ const Controller = {
                 if (type === '2') {
                     this.switchPage(this.$elLotteryPage);
                     this.showLotteryDiv(title, number);
-                    this.lotteryStart();
                 } else if (type === '1') {
                     this.lotteryStart();
                 } else if (type === '0') {
@@ -173,7 +172,7 @@ const Controller = {
                 $(this).find('img').prop('src', 'http://www.owulia.com/static/temp/5.jpg');
                 $(this).find('span').text(index);
             })
-        },60)
+        },200)
     },
 
     // 展示奖品人数
