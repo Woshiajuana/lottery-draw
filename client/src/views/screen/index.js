@@ -18,6 +18,7 @@ const Controller = {
     $elLoginInput: $('#login-input'),
 
     $elSignUserPop: $('#sign-pop'),
+    $elSignScene: $('#scene'),
 
 
     signUser: {
@@ -106,10 +107,10 @@ const Controller = {
             } = user;
             this.$elSignUserPop.find('img').prop('src', headImgUrl);
             this.$elSignUserPop.find('span').text(nickName);
-            this.$elSignUserPop.show();
+            this.$elSignUserPop.removeClass('hidden');
             this.signUser.index = index;
             setTimeout(() => {
-                this.$elSignUserPop.hide();
+                this.$elSignUserPop.addClass('hidden');
             },3000);
         }
         setTimeout(() => {

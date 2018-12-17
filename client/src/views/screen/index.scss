@@ -187,6 +187,9 @@ body{
         color: #fff;
         margin-top: j(20);
     }
+    &.hidden{
+        @extend %dn;
+    }
 }
 .sign-img{
     @extend %df;
@@ -201,6 +204,5 @@ body{
         width: j(100);
         height: j(100);
         border-radius: 50%;
-        background-color: red;
     }
 }
