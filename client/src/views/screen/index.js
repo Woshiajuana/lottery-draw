@@ -35,6 +35,7 @@ const Controller = {
             'disconnect',
             'signEvent',
             'screenAcceptEvent',
+            'luckEvent',
         ],
     },
     init () {
@@ -72,6 +73,10 @@ const Controller = {
         page && page.addClass('show');
     },
 
+    // 抽奖事件
+    luckEventHandle (data) {
+        console.log('抽奖事件', data)
+    },
 
     // 登录事件处理
     loginEventHandle (data) {
@@ -157,7 +162,7 @@ const Controller = {
             html += `
             <div class="lottery-item">
                 <div class="lottery-info">
-                    <img src="assets/images/html/user_default_icon.png" alt="">
+                    <img src="assets/images/user_default_icon.png" alt="">
                 </div>
                 <span>幸运儿</span>
             </div>`;

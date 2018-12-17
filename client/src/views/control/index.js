@@ -154,18 +154,16 @@ const Controller = {
     // 抽奖按钮事件
     handleLotteryButton (e) {
         let type = $(e.target).data('type');
+        let cls = $(e.target).data('class');
         let number = this.$elLotteryNumberInput.val().trim();
         let title = this.$elLotteryTitleInput.val().trim();
         switch (type) {
             // 重置撤销
             case 'reset':
+                this.$elInput.prop('disabled', false);
                 break;
             // 展示
             case 'go':
-
-                break;
-            // 开始
-            case 'start':
                 if (!number || !title)
                     return Toast.msg('请把参数填写完成');
                 Toast.confirm({
@@ -173,17 +171,26 @@ const Controller = {
                 }).then((text) => {
                     if (text !== '确认')
                         return;
+                    this.$elInput.prop('disabled', true);
                     this.consoleSendData.title = title;
                     this.consoleSendData.number = number;
                     this.socketService.socket.emit('consoleSendEvent', this.consoleSendData);
                 });
                 break;
+            // 开始
+            case 'start':
+                this.consoleSendData.type = '1';
+                this.socketService.socket.emit('luckEvent', this.consoleSendData);
+                break;
             // 停止
             case 'stop':
+                this.consoleSendData.type = '0';
+                this.socketService.socket.emit('luckEvent', this.consoleSendData);
+                this.$elInput.prop('disabled', false);
                 break;
         }
         if (type !== 'go');
-            this.$elLotteryOperate.removeClass('start reset go stop').addClass(type);
+            this.$elLotteryOperate.removeClass('start reset go stop').addClass(cls);
     },
     // 页面展示this
     switchPage (page) {
@@ -210,12 +217,9 @@ const Controller = {
         Toast.hide();
         Toast.msg(message);
     },
-    // 签到事件处理
-    signEventHandle (data) {
-        console.log('签到事件处理', data);
-    },
     // 控制器指令触发事件
     consoleSendEventHandle (data = '') {
+        console.log('控制器指令触发事件', data);
         let {
             code,
             message,
@@ -229,6 +233,15 @@ const Controller = {
             nums
         } = data;
         this.$elSignNumber.text(nums);
+    },
+    // 抽奖事件
+    luckEvent (data) {
+        console.log('签到事件', data);
+        let {
+            code,
+            message,
+        } = data;
+        if(code !== '000' && message) Toast.msg(message);
     },
 
     // 信息数据处理
