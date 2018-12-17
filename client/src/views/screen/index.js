@@ -11,6 +11,7 @@ const Controller = {
     $elSignPage: $('#sign-wrap'),
     $elPrizePage: $('#prize-wrap'),
     $elLotteryPage: $('#lottery-wrap'),
+    $elHomePage: $('#home-inner'),          // 欢迎页面
 
 
     $elLoginBtn: $('#login-button'),
@@ -23,6 +24,8 @@ const Controller = {
             'error',
             'close',
             'disconnect',
+            'signEvent',
+            'screenAcceptEvent',
         ],
     },
     init () {
@@ -37,11 +40,11 @@ const Controller = {
         let password = this.$elLoginInput.val();
         if (!password)
             return Toast.msg('请输入口令');
+        Toast.show();
         if (!this.socketService.socket) {
-            this.socketService.socket = new Socket();
+            this.socketService.socket = new Socket(this);
             this.socketService.socket.on(this.socketService.event, this);
         }
-        Toast.show();
         this.socketService.socket.emit('loginEvent', { password });
     },
     // input聚焦事件
@@ -62,6 +65,7 @@ const Controller = {
 
     // 登录事件处理
     loginEventHandle (data) {
+        console.log(11)
         let {
             code,
             message,
@@ -73,6 +77,14 @@ const Controller = {
         }
         Toast.hide();
         Toast.msg(message);
+    },
+    // 签到事件
+    signEventHandle (data) {
+        console.log('签到事件', data);
+    },
+    // 大屏幕信息接收事件
+    screenAcceptEvent (data) {
+        console.log('大屏幕信息接收事件', data);
     },
 
 

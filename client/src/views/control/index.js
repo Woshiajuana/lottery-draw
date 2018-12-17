@@ -10,8 +10,8 @@ const Controller = {
     $elLoginPage: $('#login-inner'),        // 登录页面
     $elSignPage: $('#sign-inner'),          // 签到页面
     $elHomePage: $('#home-inner'),          // 欢迎页面
-
     $elLotteryPage: $('#lottery-inner'),    // 抽奖页面
+
     $elLotteryInput: $('#lottery-inner input'),
     $elLotteryTitleInput: $('#lottery-inner .title'),
     $elLotteryNumberInput: $('#lottery-inner .number'),
@@ -31,6 +31,7 @@ const Controller = {
             'error',
             'close',
             'disconnect',
+            'loginEvent',
         ],
     },
     prizeData: {
@@ -65,6 +66,9 @@ const Controller = {
         },
     },
 
+    consoleSendData: {
+
+    },
 
     init () {
         // this.socketService.socket = new Socket();
@@ -84,13 +88,18 @@ const Controller = {
     },
     // 菜单选择
     handleMenu (e) {
-        let type = $(e.target).data('type');
+        let scene = $(e.target).data('type');
         let page = this.$elLotteryPage;
-        switch (type) {
+        switch (scene) {
             // 签到展示
             case '0001':
+                this.consoleSendData = {
+                    scene,
+                    type: '2',
+                    title: '签到',
+                };
                 page = this.$elSignPage;
-                this.socketService.socket.emit('signEvent', {});
+                this.socketService.socket.emit('consoleSendEvent', this.consoleSendData);
                 break;
             // 特等奖
             case '0002':
@@ -108,6 +117,12 @@ const Controller = {
                 } = this.prizeData[type];
                 this.$elLotteryNumberInput.val(number);
                 this.$elLotteryTitleInput.val(title);
+                this.consoleSendData = {
+                    scene,
+                    type: '2',
+                    title: title || '',
+                    number: number || 0,
+                };
                 break;
         }
         this.switchPage(page);
@@ -142,13 +157,31 @@ const Controller = {
                 break;
             // 展示
             case 'go':
+                let number = this.$elLotteryNumberInput.val().trim();
+                let title = this.$elLotteryTitleInput.val().trim();
+                if (!number || !title)
+                    return Toast.msg('请把参数填写完成');
+                this.consoleSendData = {
+                    ...this.consoleSendData,
+                    type: '2',
+                    title,
+                    number,
+                };
+                this.socketService.socket.emit('consoleSendEvent', this.consoleSendData);
                 break;
             // 开始
             case 'start':
                 Toast.confirm({
                     content: `请确认是否显示到大屏幕？`,
                 }).then((text) => {
-                    text === '确认' && this.$elLotteryOperate.removeClass('start reset go stop').addClass(type);
+                    if (text !== '确认')
+                        return;
+                    this.socketService.socket.emit('consoleSendEvent', {
+                        scene: '0001',
+                        type: '2',
+                        title: '签到',
+                    });
+                    this.$elLotteryOperate.removeClass('start reset go stop').addClass(type);
                 });
                 break;
             // 停止
@@ -185,7 +218,11 @@ const Controller = {
     },
     // 签到事件处理
     signEventHandle (data) {
-        console.log(data);
+        console.log('签到事件处理', data);
+    },
+    // 控制器指令触发事件
+    consoleSendEventHandle (data) {
+        console.log('控制器指令触发事件', data);
     },
 
     // 信息数据处理
