@@ -172,9 +172,11 @@ const Controller = {
                     if (text !== '确认')
                         return;
                     this.$elInput.prop('disabled', true);
+                    this.consoleSendData.type = '2';
                     this.consoleSendData.title = title;
                     this.consoleSendData.number = number;
                     this.socketService.socket.emit('consoleSendEvent', this.consoleSendData);
+                    this.$elLotteryOperate.removeClass('start reset go stop').addClass(cls);
                 });
                 break;
             // 开始
@@ -185,11 +187,11 @@ const Controller = {
             // 停止
             case 'stop':
                 this.consoleSendData.type = '0';
-                this.socketService.socket.emit('luckEvent', this.consoleSendData);
+                this.socketService.socket.emit('consoleSendEvent', this.consoleSendData);
                 this.$elInput.prop('disabled', false);
                 break;
         }
-        if (type !== 'go');
+        if (type !== 'go')
             this.$elLotteryOperate.removeClass('start reset go stop').addClass(cls);
     },
     // 页面展示this

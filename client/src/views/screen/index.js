@@ -76,12 +76,6 @@ const Controller = {
         page && page.addClass('show');
     },
 
-    // 抽奖事件
-    luckShowEventHandle (data) {
-        console.log('抽奖事件', data)
-        this.screenAcceptEventHandle(data);
-    },
-
     // 登录事件处理
     loginEventHandle (data) {
         let {
@@ -138,6 +132,7 @@ const Controller = {
             type,
             title,
             number,
+            object,
         } = data;
         switch (scene) {
             // 签到展示
@@ -155,9 +150,15 @@ const Controller = {
             // 随机大抽奖
             case '0006':
                 this.switchPage(this.$elLotteryPage);
-                this.showLotteryDiv(title, number);
+                if (type === '2') {
+                    this.showLotteryDiv(title, new Array(+number));
+                }
                 if (type === '1') {
                     this.lotteryStart();
+                }
+                if (type === '0') {
+                    clearInterval(this.lotteryTimer);
+                    this.showLotteryDiv(title, new Array(+number), object);
                 }
                 break;
         }
@@ -175,16 +176,21 @@ const Controller = {
     },
 
     // 展示奖品人数
-    showLotteryDiv (title, number) {
+    showLotteryDiv (title, arr, object) {
         this.$elLotteryPage.find('.lottery-title').text(title);
+        if (object)
+            arr = object;
         let html = '';
-        for (let index = 0; index < parseInt(number); index++) {
+        for (let i = 0; i < arr.length; i++) {
+            let item = arr[i] || {};
+            let img = item.headImgUrl || 'assets/images/user_default_icon.png';
+            let text = item.nickName || '幸运儿';
             html += `
             <div class="lottery-item">
                 <div class="lottery-info">
-                    <img src="assets/images/user_default_icon.png" alt="">
+                    <img src="${img}" alt="">
                 </div>
-                <span>幸运儿</span>
+                <span>${text}</span>
             </div>`;
         }
         this.$elLotteryPage.find('.lottery-con').html(html);
