@@ -103,7 +103,7 @@ const Controller = {
             headImgUrl,
             nickName,
         } = user;
-        this.$elSignScene.find('.def').eq(0).prop('src', headImgUrl).removeClass('.def');
+        this.$elSignScene.find('.def').eq(0).prop('src', headImgUrl).removeClass('def');
     },
 
     // 展示签到
@@ -181,13 +181,24 @@ const Controller = {
         }
     },
 
+    // 开始抽奖
     lotteryStart () {
+        let {
+            totals,
+        } = this.signUser;
         let index = 0;
         this.lotteryTimer = setInterval(() => {
             this.$elLotteryPage.find('.lottery-item').each(function () {
+                let user = totals[index];
+                if (!user) {
+                    index = 0;
+                    user = totals[index]
+                }
                 index++;
-                $(this).find('img').prop('src', 'http://www.owulia.com/static/temp/5.jpg');
-                $(this).find('span').text(index);
+                let img = user.headImgUrl || 'assets/images/user_default_icon.png';
+                let text = user.nickName || '幸运儿';
+                $(this).find('img').prop('src', img);
+                $(this).find('span').text(text);
             })
         },200)
     },
