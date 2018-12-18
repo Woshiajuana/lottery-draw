@@ -25,6 +25,7 @@ const Controller = {
         numbers: [],
         index: -1,
         totals: [],
+        timer: null,
     },
 
     lotteryTimer: null,
@@ -41,14 +42,13 @@ const Controller = {
             'luckShowEvent',
         ],
     },
+
     init () {
         // this.socketService.socket = new Socket();
         // this.socketService.socket.on(this.socketService.event, this);
         this.$elInput.on('focus', this.handleFocus.bind(this));
         this.$elInput.on('blur', this.handleBlur.bind(this));
         this.$elLoginBtn.on('click', this.handleLogin.bind(this));
-
-        this.signUserShowPop();
     },
     // 创建登录
     handleLogin () {
@@ -97,29 +97,38 @@ const Controller = {
         this.signUser.totals.push(data);
     },
 
+    // 签到插入图片
+    innerUserInfo (user) {
+        let {
+            headImgUrl,
+            nickName,
+        } = user;
+        this.$elSignScene.find('.def').eq(0).prop('src', headImgUrl).removeClass('.def');
+    },
+
     // 展示签到
     signUserShowPop () {
-        let {
-            index,
-            numbers,
-        } = this.signUser;
-        index++;
-        let user = numbers[index];
-        if (user && this.$elSignPage.hasClass('show')) {
+        this.signUser.timer = setInterval(() => {
             let {
-                headImgUrl,
-                nickName,
-            } = user;
-            this.$elSignUserPop.find('img').prop('src', headImgUrl);
-            this.$elSignUserPop.find('span').text(nickName);
-            this.$elSignUserPop.removeClass('hidden');
-            this.signUser.index = index;
-            setTimeout(() => {
-                this.$elSignUserPop.addClass('hidden');
-            },3000);
-        }
-        setTimeout(() => {
-            this.signUserShowPop();
+                index,
+                numbers,
+            } = this.signUser;
+            index++;
+            let user = numbers[index];
+            if (user && this.$elSignPage.hasClass('show')) {
+                let {
+                    headImgUrl,
+                    nickName,
+                } = user;
+                this.$elSignUserPop.find('img').prop('src', headImgUrl);
+                this.$elSignUserPop.find('span').text(nickName);
+                this.$elSignUserPop.removeClass('hidden');
+                this.signUser.index = index;
+                this.innerUserInfo(user);
+                setTimeout(() => {
+                    this.$elSignUserPop.addClass('hidden');
+                },3000);
+            }
         }, 5000);
     },
 
@@ -127,6 +136,7 @@ const Controller = {
     screenAcceptEventHandle (data) {
         console.log('大屏幕信息接收事件', data);
         clearInterval(this.lotteryTimer);
+        clearInterval(this.signUser.timer);
         let {
             scene,
             type,
@@ -137,7 +147,14 @@ const Controller = {
         switch (scene) {
             // 签到展示
             case '0001':
+                this.signUser.totals = object || [];
+                this.signUser.numbers = [];
+                this.signUser.index = -1;
                 this.switchPage(this.$elSignPage);
+                this.signUserShowPop();
+                this.signUser.totals.forEach((user, index) => {
+                    this.innerUserInfo(user);
+                });
                 break;
             // 特等奖
             case '0002':
