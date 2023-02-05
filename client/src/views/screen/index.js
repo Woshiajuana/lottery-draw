@@ -38,6 +38,7 @@ const Controller = {
             'close',
             'disconnect',
             'signEvent',
+            'loginEvent',
             'screenAcceptEvent',
             'luckShowEvent',
         ],
@@ -49,6 +50,7 @@ const Controller = {
         this.$elInput.on('focus', this.handleFocus.bind(this));
         this.$elInput.on('blur', this.handleBlur.bind(this));
         this.$elLoginBtn.on('click', this.handleLogin.bind(this));
+        // this.signUserShowPop()
     },
     // 创建登录
     handleLogin () {

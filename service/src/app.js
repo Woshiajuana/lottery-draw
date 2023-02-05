@@ -18,8 +18,9 @@ io.on('connection', (socket) => {
     socket.emit('success', {});
 
     // 验证口令
-    socket.on('password', (data = '') => {
-        console.log(data);
+    socket.on('loginEvent', (data = '') => {
+        console.log('data => ', data, typeof data);
+        data = JSON.parse(data)
         try {
             let {
                 password,
@@ -27,6 +28,7 @@ io.on('connection', (socket) => {
             if (!password)
                 throw new Error();
             let isRight = false;
+            console.log('password => ', password, screenClient)
             for (let key in controllerClient) {
                 if (key === password) {
                     controllerClient[key] = socket;
@@ -43,9 +45,9 @@ io.on('connection', (socket) => {
             }
             if (!isRight)
                 throw new Error();
-            socket.emit('password', { code: '0000', msg: '登录成功！'})
+            socket.emit('loginEvent', { code: '0000', msg: '登录成功！'})
         } catch (e) {
-            socket.emit('password', { code: '-1', msg: '口令错误！'})
+            socket.emit('loginEvent', { code: '-1', msg: '口令错误！'})
         }
     });
 
